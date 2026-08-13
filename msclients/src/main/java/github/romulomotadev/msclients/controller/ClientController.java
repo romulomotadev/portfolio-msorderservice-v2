@@ -1,0 +1,37 @@
+package github.romulomotadev.msclients.controller;
+
+import github.romulomotadev.msclients.dto.ClientDto;
+import github.romulomotadev.msclients.service.ClientService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+
+@RestController
+@RequestMapping("/clients")
+@RequiredArgsConstructor
+public class ClientController {
+
+    private final ClientService clientService;
+
+
+    //================== POST ====================
+
+    @PostMapping
+    public ResponseEntity<ClientDto> save(@RequestBody ClientDto clientDto) {
+        ClientDto client = clientService.save(clientDto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(client.getId()).toUri();
+        return ResponseEntity.created(uri).body(client);
+    }
+
+
+    //================== GET ====================
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientDto> findById(@PathVariable Long id) {
+        ClientDto client = clientService.findById(id);
+        return ResponseEntity.ok().body(client);
+    }
+}

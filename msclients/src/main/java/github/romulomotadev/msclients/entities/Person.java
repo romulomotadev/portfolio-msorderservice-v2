@@ -17,4 +17,8 @@ public class Person {
     private Long id;
     private Type type;
     private String document;
+
+    @OneToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 }

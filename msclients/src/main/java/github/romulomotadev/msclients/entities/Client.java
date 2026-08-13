@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,12 +18,11 @@ public class Client {
     private Long id;
     private String name;
     private String email;
-    private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
     private Person person;
 
-    @OneToMany(mappedBy = "client")
-    private List<Address> addresses;
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
 
 }

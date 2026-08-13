@@ -1,12 +1,17 @@
 package github.romulomotadev.msclients.dto;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import github.romulomotadev.msclients.entities.Client;
 import github.romulomotadev.msclients.entities.Person;
 import github.romulomotadev.msclients.entities.Type;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@JsonPropertyOrder( { "id", "type", "document"})
 public class PersonDto {
 
     private Long id;
