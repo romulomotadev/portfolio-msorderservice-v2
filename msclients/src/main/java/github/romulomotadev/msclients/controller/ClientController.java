@@ -29,9 +29,17 @@ public class ClientController {
 
     //================== GET ====================
 
+    //BUSCA POR ID
     @GetMapping("/{id}")
     public ResponseEntity<ClientDto> findById(@PathVariable Long id) {
         ClientDto client = clientService.findById(id);
+        return ResponseEntity.ok().body(client);
+    }
+
+    //BUSCA POR DOCUMENTO
+    @GetMapping
+    public ResponseEntity<ClientDto> findByPersonDocument(@RequestParam String document) {
+        ClientDto client = clientService.findByPersonDocument(document);
         return ResponseEntity.ok().body(client);
     }
 }

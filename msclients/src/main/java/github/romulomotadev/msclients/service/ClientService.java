@@ -7,6 +7,7 @@ import github.romulomotadev.msclients.entities.Client;
 import github.romulomotadev.msclients.entities.Person;
 import github.romulomotadev.msclients.exception.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msclients.repository.ClientRepository;
+import github.romulomotadev.msclients.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class ClientService {
 
     private final ClientRepository clientRepository;
+    private final PersonRepository personRepository;
 
 
     //================== POST ====================
@@ -51,10 +53,18 @@ public class ClientService {
 
     //================== GET ====================
 
+    // BUSCA POR ID
     public ClientDto findById(Long id) {
         Client client = clientRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Id not found"));
         return new ClientDto(client);
     }
+
+    //BUSCA POR DOCUMENTO
+    public ClientDto findByPersonDocument(String document) {
+        Client client = clientRepository.findByPersonDocument(document);
+        return new ClientDto(client);
+    }
+
 
 }
