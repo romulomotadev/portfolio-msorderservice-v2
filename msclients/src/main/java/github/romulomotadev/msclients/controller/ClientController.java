@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/clients")
@@ -37,9 +38,24 @@ public class ClientController {
     }
 
     //BUSCA POR DOCUMENTO
-    @GetMapping
+    @GetMapping(value = "/document")
     public ResponseEntity<ClientDto> findByPersonDocument(@RequestParam String document) {
         ClientDto client = clientService.findByPersonDocument(document);
         return ResponseEntity.ok().body(client);
+    }
+
+    // BUSCAR TODOS CLIENTES
+    @GetMapping
+    public ResponseEntity<List<ClientDto>> findAll(){
+        List<ClientDto> clients = clientService.findAll();
+        return ResponseEntity.ok().body(clients);
+    }
+
+
+    //================== DELETE ====================
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        clientService.delete(id);
     }
 }

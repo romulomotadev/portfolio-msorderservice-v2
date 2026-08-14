@@ -19,7 +19,6 @@ import java.util.List;
 public class ClientService {
 
     private final ClientRepository clientRepository;
-    private final PersonRepository personRepository;
 
 
     //================== POST ====================
@@ -65,6 +64,24 @@ public class ClientService {
         Client client = clientRepository.findByPersonDocument(document);
         return new ClientDto(client);
     }
+
+    // BUSCAR TODOS CLIENTES
+    public List<ClientDto> findAll(){
+        List<Client> clients = clientRepository.findAll();
+        return clients.stream().map(ClientDto::new).toList();
+    }
+
+
+    //================== DELETE ====================
+
+    public void delete(Long id) {
+        if(!clientRepository.existsById(id)){
+            throw new ResourceNotFoundException("Id not found");
+        } else {
+            clientRepository.deleteById(id);
+        }
+    }
+
 
 
 }
