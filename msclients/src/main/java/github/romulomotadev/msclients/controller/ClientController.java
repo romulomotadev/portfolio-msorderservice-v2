@@ -59,4 +59,14 @@ public class ClientController {
     public void delete(@PathVariable Long id) {
         clientService.delete(id);
     }
+
+
+    //================== PUT ====================
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClientDto> update(@RequestBody ClientDto clientDto, @PathVariable Long id) {
+        ClientDto client = clientService.update(clientDto, id);
+        return ResponseEntity.ok().body(client);
+    }
+
 }

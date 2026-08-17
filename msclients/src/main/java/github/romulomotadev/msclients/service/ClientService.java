@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
@@ -26,23 +26,15 @@ public class ClientService {
     @Transactional
     public ClientDto save(ClientDto clientDto) {
         Client client = new Client();
-        client.setName(clientDto.getName());
-        client.setEmail(clientDto.getEmail());
+        copyClientDtoToClient(clientDto, client);
 
         Person person = new Person();
-        person.setType(clientDto.getPerson().getType());
-        person.setDocument(clientDto.getPerson().getDocument());
+        copyPersonDtoPerson(person, clientDto);
         person.setClient(client);
 
-        List<Address> addresses = new ArrayList<>();
-        for(AddressDto addressDto : clientDto.getAddresses()){
-            Address address = new Address();
-            address.setAddress(addressDto.getAddress());
-            address.setZipCode(addressDto.getZipCode());
-            address.setComplement(addressDto.getComplement());
-            address.setClient(client);
-            addresses.add(address);
-        }
+        List<Address> addresses = client.getAddresses();
+        addresses.clear();
+        copyAddressDtoAddress(clientDto, client, addresses);
 
         client.setPerson(person);
         client.setAddresses(addresses);
@@ -87,6 +79,51 @@ public class ClientService {
         }
     }
 
+    //================== PUT ====================
+
+    @Transactional
+    public ClientDto update(ClientDto clientDto, Long id) {
+        Client client = clientRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Id not found"));
+        copyClientDtoToClient(clientDto, client);
+
+        Person person = client.getPerson();
+        copyPersonDtoPerson(person, clientDto);
+
+        List<Address> addresses = client.getAddresses();
+        addresses.clear();
+        copyAddressDtoAddress(clientDto, client, addresses);
+
+        client.setPerson(person);
+        client = clientRepository.save(client);
+        return new ClientDto(client);
+    }
 
 
+    //================== AUX ====================
+
+    // COPIA DADOS DO CLIENT DTO PARA ENTIDADE CLIENT
+    public void copyClientDtoToClient(ClientDto clientDto, Client client){
+        client.setName(clientDto.getName());
+        client.setEmail(clientDto.getEmail());
+    }
+
+    // COPIA DADOS DO PERSON DTO PARA ENTIDADE PERSON
+    private void copyPersonDtoPerson(Person person, ClientDto clientDto){
+        person.setType(clientDto.getPerson().getType());
+        person.setDocument(clientDto.getPerson().getDocument());
+    }
+
+    // COPIA DADOS DE ADDRESS DTO PARA ENTIDADE ADDRESS
+    private void copyAddressDtoAddress(ClientDto clientDto, Client client, List<Address> addresses){
+
+        for(AddressDto addressDto : clientDto.getAddresses()){
+            Address address = new Address();
+            address.setAddress(addressDto.getAddress());
+            address.setZipCode(addressDto.getZipCode());
+            address.setComplement(addressDto.getComplement());
+            address.setClient(client);
+            addresses.add(address);
+        }
+    }
 }

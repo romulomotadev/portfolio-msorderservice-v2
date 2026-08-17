@@ -23,7 +23,8 @@ public class Client {
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
     private Person person;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    //orphanRemoval = true : Ao executar addresses.clear(), o Hibernate remove os endereços antigos do banco.
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 
 }
