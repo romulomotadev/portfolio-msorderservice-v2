@@ -3,6 +3,8 @@ package github.romulomotadev.msclients.dto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import github.romulomotadev.msclients.entities.Address;
 import github.romulomotadev.msclients.entities.Client;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,9 +17,13 @@ import java.util.List;
 public class ClientDto {
 
     private Long id;
+    @NotBlank(message = "Name is required")
     private String name;
+    @NotBlank(message = "Email is required")
     private String email;
+    @Valid
     private PersonDto person;
+    @Valid
     private List<AddressDto> addresses = new ArrayList<>();
 
 

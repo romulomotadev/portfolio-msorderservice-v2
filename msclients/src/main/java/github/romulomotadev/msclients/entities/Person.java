@@ -16,6 +16,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Type type;
+    @Column(unique = true)
     private String document;
 
     @OneToOne

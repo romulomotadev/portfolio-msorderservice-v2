@@ -7,9 +7,9 @@ import github.romulomotadev.msclients.entities.Client;
 import github.romulomotadev.msclients.entities.Person;
 import github.romulomotadev.msclients.exception.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msclients.repository.ClientRepository;
-import github.romulomotadev.msclients.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,7 @@ public class ClientService {
 
     //================== POST ====================
 
+    @Transactional
     public ClientDto save(ClientDto clientDto) {
         Client client = new Client();
         client.setName(clientDto.getName());
@@ -53,6 +54,7 @@ public class ClientService {
     //================== GET ====================
 
     // BUSCA POR ID
+    @Transactional(readOnly = true)
     public ClientDto findById(Long id) {
         Client client = clientRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Id not found"));
@@ -60,12 +62,14 @@ public class ClientService {
     }
 
     //BUSCA POR DOCUMENTO
+    @Transactional(readOnly = true)
     public ClientDto findByPersonDocument(String document) {
         Client client = clientRepository.findByPersonDocument(document);
         return new ClientDto(client);
     }
 
     // BUSCAR TODOS CLIENTES
+    @Transactional(readOnly = true)
     public List<ClientDto> findAll(){
         List<Client> clients = clientRepository.findAll();
         return clients.stream().map(ClientDto::new).toList();
@@ -74,6 +78,7 @@ public class ClientService {
 
     //================== DELETE ====================
 
+    @Transactional
     public void delete(Long id) {
         if(!clientRepository.existsById(id)){
             throw new ResourceNotFoundException("Id not found");

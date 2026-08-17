@@ -2,6 +2,7 @@ package github.romulomotadev.msclients.controller;
 
 import github.romulomotadev.msclients.dto.ClientDto;
 import github.romulomotadev.msclients.service.ClientService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class ClientController {
     //================== POST ====================
 
     @PostMapping
-    public ResponseEntity<ClientDto> save(@RequestBody ClientDto clientDto) {
+    public ResponseEntity<ClientDto> save(@Valid @RequestBody ClientDto clientDto) {
         ClientDto client = clientService.save(clientDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(client.getId()).toUri();
         return ResponseEntity.created(uri).body(client);

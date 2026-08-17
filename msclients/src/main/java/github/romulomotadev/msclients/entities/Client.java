@@ -17,6 +17,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(unique = true)
     private String email;
 
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)

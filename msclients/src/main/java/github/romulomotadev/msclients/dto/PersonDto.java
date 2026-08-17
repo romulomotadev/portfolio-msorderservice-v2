@@ -6,6 +6,7 @@ import github.romulomotadev.msclients.entities.Person;
 import github.romulomotadev.msclients.entities.Type;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ public class PersonDto {
 
     private Long id;
     private Type type;
+    @NotBlank(message = "Document is required")
     private String document;
 
     public PersonDto(Person entity) {
