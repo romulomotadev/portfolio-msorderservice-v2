@@ -4,8 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Data
@@ -18,6 +19,6 @@ public class Category {
     private Long id;
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
-    private Set<Product> products = new HashSet<>();
+    @OneToMany(mappedBy = "category")
+    private List<Product> products = new ArrayList<>();
 }
