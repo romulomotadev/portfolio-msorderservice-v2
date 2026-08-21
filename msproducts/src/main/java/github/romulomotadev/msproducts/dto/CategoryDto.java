@@ -15,15 +15,9 @@ public class CategoryDto {
     private Long id;
     private String name;
 
-    private List<ProductDto> productDtoList = new ArrayList<>();
-
 
     public CategoryDto(Category entity) {
         id = entity.getId();
         name = entity.getName();
-
-        for (Product product : entity.getProducts()) {
-            productDtoList.add(new ProductDto(product));
-        }
     }
 }

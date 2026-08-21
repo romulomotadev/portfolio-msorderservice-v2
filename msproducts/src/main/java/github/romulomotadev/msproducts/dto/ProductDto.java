@@ -5,6 +5,8 @@ import github.romulomotadev.msproducts.entities.Product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.security.Principal;
+
 @Data
 @NoArgsConstructor
 public class ProductDto {
@@ -15,6 +17,8 @@ public class ProductDto {
     private String sku;
     private Double price;
     private Boolean active;
+
+    private CategoryDto categoryDto;
 
     private StockDto stockDto;
 
@@ -27,6 +31,7 @@ public class ProductDto {
         price = entity.getPrice();
         active = entity.getActive();
 
+        categoryDto = new CategoryDto(entity.getCategory());
         stockDto = new StockDto(entity);
     }
 }
