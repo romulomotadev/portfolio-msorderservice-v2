@@ -5,6 +5,8 @@ import github.romulomotadev.msproducts.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/category")
@@ -24,9 +26,16 @@ public class CategoryController {
 
     //============ GET ===============//
 
+    //Busca por ID
     @GetMapping(value = "/{id}")
     public CategoryDto findById(@PathVariable Long id){
         return categoryService.findById(id);
+    }
+
+    //Busca por nome
+    @GetMapping(value = "/search")
+    public List<CategoryDto> searchByName(@RequestParam String name){
+        return categoryService.searchByName(name);
     }
 
 }

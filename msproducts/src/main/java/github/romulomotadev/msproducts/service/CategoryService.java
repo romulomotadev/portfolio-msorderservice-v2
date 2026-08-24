@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
@@ -37,4 +39,10 @@ public class CategoryService {
                 ()-> new RuntimeException("Category not found" + id)));
     }
 
+    // BUSCA POR NOME
+    @Transactional(readOnly = true)
+    public List<CategoryDto> searchByName(String name) {
+        List<Category> categories = categoryRepository.searchByName(name);
+        return categories.stream().map(CategoryDto::new).toList();
+    }
 }
