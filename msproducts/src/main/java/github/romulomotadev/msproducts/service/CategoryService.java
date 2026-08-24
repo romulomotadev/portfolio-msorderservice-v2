@@ -35,8 +35,9 @@ public class CategoryService {
     // BUSCA POR ID
     @Transactional(readOnly = true)
     public CategoryDto findById(Long id) {
-        return new CategoryDto(categoryRepository.findById(id).orElseThrow(
-                ()-> new RuntimeException("Category not found" + id)));
+        Category category = categoryRepository.findById(id).orElseThrow(
+                ()-> new ResourseNotFoundException("Category not found"));
+        return new CategoryDto(category);
     }
 
     // BUSCA POR NOME
@@ -44,5 +45,36 @@ public class CategoryService {
     public List<CategoryDto> searchByName(String name) {
         List<Category> categories = categoryRepository.searchByName(name);
         return categories.stream().map(CategoryDto::new).toList();
+    }
+
+    // BUSCA TODAS CATEGORIAS
+    @Transactional(readOnly = true)
+    public List<CategoryDto> findAll() {
+        List<Category> categoryList = categoryRepository.findAll();
+        return categoryList.stream().map(CategoryDto::new).toList();
+    }
+
+
+    //============ PUT ===============//
+
+    @Transactional
+    public CategoryDto update(Long id, CategoryDto categoryDto){
+        Category category = categoryRepository.findById(id).orElseThrow(
+                () -> new ResourseNotFoundException("Category not found"));
+        category.setName(categoryDto.getName());
+        categoryRepository.save(category);
+        return new CategoryDto(category);
+    }
+
+
+    //============ DELETE ===============//
+
+    @Transactional
+    public void delete(Long id){
+        if(!categoryRepository.existsById(id)){
+            throw new ResourseNotFoundException("Category not found");
+        }else{
+            categoryRepository.deleteById(id);
+        }
     }
 }
