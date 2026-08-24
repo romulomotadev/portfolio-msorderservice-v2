@@ -1,6 +1,7 @@
 package github.romulomotadev.msproducts.repository;
 
 import github.romulomotadev.msproducts.entities.Category;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +18,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
                     "FROM TB_CATEGORY " +
                     "WHERE UPPER(TB_CATEGORY.NAME) LIKE UPPER('%' || :name || '%')")
     List<Category> searchByName(@Param("name") String name);
+
+    // VERIFICAR CATEGORIA EM BANCO
+    boolean existsByName(String name);
 }

@@ -5,7 +5,7 @@ import github.romulomotadev.msproducts.dto.ProductDto;
 import github.romulomotadev.msproducts.entities.Category;
 import github.romulomotadev.msproducts.entities.Product;
 import github.romulomotadev.msproducts.entities.Stock;
-import github.romulomotadev.msproducts.exception.exceptions.ResourseNotFoundException;
+import github.romulomotadev.msproducts.exception.exceptions.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msproducts.repository.CategoryRepository;
 import github.romulomotadev.msproducts.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class ProductService {
         product.setActive(productDto.getActive());
 
         Category category = categoryRepository.findById(productDto.getCategoryDto().getId()).orElseThrow(
-                ()-> new ResourseNotFoundException("not found category information with product: "
+                ()-> new ResourceNotFoundException("not found category information with product: "
                         + productDto.getCategoryDto().getId()));
         product.setCategory(category);
 
@@ -54,7 +54,7 @@ public class ProductService {
     public ProductDto saveStock(ProductDto productDto, Long id) {
 
         Product product = productRepository.findById(id).orElseThrow(
-                () -> new ResourseNotFoundException("not found product with id: " + id));
+                () -> new ResourceNotFoundException("not found product with id: " + id));
 
         Category category = product.getCategory();
         product.setCategory(category);

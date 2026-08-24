@@ -2,7 +2,8 @@ package github.romulomotadev.msproducts.service;
 
 import github.romulomotadev.msproducts.dto.CategoryDto;
 import github.romulomotadev.msproducts.entities.Category;
-import github.romulomotadev.msproducts.exception.exceptions.ResourseNotFoundException;
+import github.romulomotadev.msproducts.exception.exceptions.exceptions.DataDuplicateException;
+import github.romulomotadev.msproducts.exception.exceptions.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msproducts.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,15 @@ public class CategoryService {
     @Transactional
     public CategoryDto save(CategoryDto categoryDto) {
 
-        Category category = new Category();
-        category.setName(categoryDto.getName());
+        if (categoryRepository.existsByName(categoryDto.getName())) {
+            throw new DataDuplicateException("Category already exists");
+        } else {
+            Category category = new Category();
+            category.setName(categoryDto.getName());
 
-        categoryRepository.save(category);
-        return new CategoryDto(category);
+            categoryRepository.save(category);
+            return new CategoryDto(category);
+        }
     }
 
 
@@ -36,7 +41,7 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public CategoryDto findById(Long id) {
         Category category = categoryRepository.findById(id).orElseThrow(
-                ()-> new ResourseNotFoundException("Category not found"));
+                ()-> new ResourceNotFoundException("Category not found"));
         return new CategoryDto(category);
     }
 
@@ -59,11 +64,15 @@ public class CategoryService {
 
     @Transactional
     public CategoryDto update(Long id, CategoryDto categoryDto){
-        Category category = categoryRepository.findById(id).orElseThrow(
-                () -> new ResourseNotFoundException("Category not found"));
-        category.setName(categoryDto.getName());
-        categoryRepository.save(category);
-        return new CategoryDto(category);
+        if (categoryRepository.existsByName(categoryDto.getName())) {
+            throw new DataDuplicateException("Category already exists");
+        } else {
+            Category category = categoryRepository.findById(id).orElseThrow(
+                    () -> new ResourceNotFoundException("Category not found"));
+            category.setName(categoryDto.getName());
+            categoryRepository.save(category);
+            return new CategoryDto(category);
+        }
     }
 
 
@@ -72,7 +81,7 @@ public class CategoryService {
     @Transactional
     public void delete(Long id){
         if(!categoryRepository.existsById(id)){
-            throw new ResourseNotFoundException("Category not found");
+            throw new ResourceNotFoundException("Category not found");
         }else{
             categoryRepository.deleteById(id);
         }

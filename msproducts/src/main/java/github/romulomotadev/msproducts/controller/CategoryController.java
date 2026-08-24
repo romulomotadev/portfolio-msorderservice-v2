@@ -2,6 +2,7 @@ package github.romulomotadev.msproducts.controller;
 
 import github.romulomotadev.msproducts.dto.CategoryDto;
 import github.romulomotadev.msproducts.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class CategoryController {
     //============ POST ===============//
 
     @PostMapping
-    public ResponseEntity<CategoryDto> save(@RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<CategoryDto> save(@Valid @RequestBody CategoryDto categoryDto) {
         CategoryDto dto = categoryService.save(categoryDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
@@ -56,7 +57,7 @@ public class CategoryController {
     //============ PUT ===============//
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<CategoryDto> update(@PathVariable Long id, @RequestBody CategoryDto categoryDto){
+    public ResponseEntity<CategoryDto> update(@PathVariable Long id,@Valid @RequestBody CategoryDto categoryDto){
         CategoryDto dto = categoryService.update(id, categoryDto);
         return ResponseEntity.ok(dto);
     }

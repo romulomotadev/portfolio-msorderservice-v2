@@ -1,18 +1,17 @@
 package github.romulomotadev.msproducts.dto;
 
 import github.romulomotadev.msproducts.entities.Category;
-import github.romulomotadev.msproducts.entities.Product;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 public class CategoryDto {
 
     private Long id;
+    @NotBlank(message = "Name is required")
     private String name;
 
 
