@@ -1,14 +1,14 @@
 package github.romulomotadev.msproducts.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import github.romulomotadev.msproducts.entities.Product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.security.Principal;
-
 @Data
 @NoArgsConstructor
+@JsonPropertyOrder( { "id", "sku", "name", "category", "description", "price", "active"})
 public class ProductDto {
 
     private Long id;
@@ -18,9 +18,7 @@ public class ProductDto {
     private Double price;
     private Boolean active;
 
-    private CategoryDto categoryDto;
-
-    private StockDto stockDto;
+    private CategoryDto category;
 
 
     public ProductDto(Product entity) {
@@ -31,7 +29,6 @@ public class ProductDto {
         price = entity.getPrice();
         active = entity.getActive();
 
-        categoryDto = new CategoryDto(entity.getCategory());
-        stockDto = new StockDto(entity);
+        category = new CategoryDto(entity.getCategory());
     }
 }

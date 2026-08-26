@@ -2,6 +2,7 @@ package github.romulomotadev.msproducts.service;
 
 
 import github.romulomotadev.msproducts.dto.ProductDto;
+import github.romulomotadev.msproducts.dto.ProductMinDto;
 import github.romulomotadev.msproducts.entities.Category;
 import github.romulomotadev.msproducts.entities.Product;
 import github.romulomotadev.msproducts.entities.Stock;
@@ -24,7 +25,7 @@ public class ProductService {
 
     //SALVAR PRODUTO/CATEGORY -> STOCK INICIADO ZERO
     @Transactional
-    public ProductDto save(ProductDto productDto) {
+    public ProductDto save(ProductMinDto productDto) {
 
         Product product = new Product();
         product.setName(productDto.getName());
@@ -33,35 +34,15 @@ public class ProductService {
         product.setPrice(productDto.getPrice());
         product.setActive(productDto.getActive());
 
-        Category category = categoryRepository.findById(productDto.getCategoryDto().getId()).orElseThrow(
+        Category category = categoryRepository.findById(productDto.getCategoryId()).orElseThrow(
                 ()-> new ResourceNotFoundException("not found category information with product: "
-                        + productDto.getCategoryDto().getId()));
+                        + productDto.getCategoryId()));
         product.setCategory(category);
 
         Stock stock = new Stock();
         stock.setQuantity(0);
         stock.setMinQuantity(0);
-        product.setStock(stock);
-
-        productRepository.save(product);
-
-        return new ProductDto(product);
-    }
-
-
-    //SALVAR STOCK
-    @Transactional
-    public ProductDto saveStock(ProductDto productDto, Long id) {
-
-        Product product = productRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("not found product with id: " + id));
-
-        Category category = product.getCategory();
-        product.setCategory(category);
-
-        Stock stock = product.getStock();
-        stock.setQuantity(productDto.getStockDto().getQuantity());
-        stock.setMinQuantity(productDto.getStockDto().getMinQuantity());
+        stock.setProduct(product);
         product.setStock(stock);
 
         productRepository.save(product);
