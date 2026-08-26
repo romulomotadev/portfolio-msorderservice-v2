@@ -39,7 +39,7 @@ public class CategoryController {
         return ResponseEntity.ok(dto);
     }
 
-    //BUSCA POR NOME
+    //ENCONTRAR CATEGORIA POR NOME
     @GetMapping(value = "/search")
     public ResponseEntity<List<CategoryDto>> searchByName(@RequestParam String name){
         List<CategoryDto> dto = categoryService.searchByName(name);

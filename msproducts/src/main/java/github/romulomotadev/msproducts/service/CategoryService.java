@@ -45,7 +45,7 @@ public class CategoryService {
         return new CategoryDto(category);
     }
 
-    // BUSCA POR NOME
+    // ENCONTRAR CATEGORIA POR NOME
     @Transactional(readOnly = true)
     public List<CategoryDto> searchByName(String name) {
         List<Category> categories = categoryRepository.searchByName(name);

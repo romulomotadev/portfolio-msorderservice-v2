@@ -10,6 +10,8 @@ import github.romulomotadev.msproducts.exception.exceptions.exceptions.ResourceN
 import github.romulomotadev.msproducts.repository.CategoryRepository;
 import github.romulomotadev.msproducts.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,4 +51,46 @@ public class ProductService {
 
         return new ProductDto(product);
     }
+
+
+    //============ GET ===============//
+
+    // BUSCA PRODUTO POR ID
+    @Transactional(readOnly = true)
+    public ProductDto findById(Long id){
+        Product product = productRepository.findById(id).orElseThrow(
+                ()-> new ResourceNotFoundException("not found product information with id: " + id));
+        return new ProductDto(product);
+    }
+
+    // BUSCA PRODUTO PELO CODIGO SKU
+    @Transactional(readOnly = true)
+    public ProductDto findBySku(String sku){
+        if(sku == null || sku.isEmpty())
+            throw new ResourceNotFoundException("not found product information with sku: " + sku);
+        Product product = productRepository.findBySku(sku);
+        return new ProductDto(product);
+    }
+
+    // BUSCA TODOS OS PRODUTOS
+    public Page<ProductDto> findAll(Pageable pageable) {
+        Page<Product> products = productRepository.findAll(pageable);
+        return products.map(ProductDto::new);
+    }
+
+    // BUSCA TODOS PRODUTOS POR CATEGORIA
+    @Transactional(readOnly = true)
+    public Page<ProductDto> findProductsByCategoryName(String categoryName, Pageable pageable){
+        Page<Product> products = productRepository.findProductsByCategoryName(categoryName, pageable);
+        return products.map(ProductDto::new);
+    }
+
+    // ENCONTRAR PRODUTOS POR NOME
+    @Transactional(readOnly = true)
+    public Page<ProductDto> searchProductByName(String name, Pageable pageable){
+        Page<Product> products = productRepository.searchProductByName(name, pageable);
+        return products.map(ProductDto::new);
+    }
+
+
 }
