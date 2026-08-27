@@ -29,6 +29,14 @@ public class ProductController {
         return ResponseEntity.created(uri).body(dto);
     }
 
+    //============ PUT ===============//
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductMinDto dto){
+        ProductDto dtoUpdated = productService.update(id, dto);
+        return ResponseEntity.ok().body(dtoUpdated);
+    }
+
     //============ GET ===============//
 
     // BUSCA PRODUTO POR ID
@@ -65,4 +73,7 @@ public class ProductController {
         Page<ProductDto> dto = productService.searchProductByName(name, pageable);
         return ResponseEntity.ok().body(dto);
     }
+
+
+
 }

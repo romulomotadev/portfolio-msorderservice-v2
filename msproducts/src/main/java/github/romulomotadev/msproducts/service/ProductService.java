@@ -1,6 +1,7 @@
 package github.romulomotadev.msproducts.service;
 
 
+import github.romulomotadev.msproducts.dto.CategoryDto;
 import github.romulomotadev.msproducts.dto.ProductDto;
 import github.romulomotadev.msproducts.dto.ProductMinDto;
 import github.romulomotadev.msproducts.entities.Category;
@@ -9,6 +10,7 @@ import github.romulomotadev.msproducts.entities.Stock;
 import github.romulomotadev.msproducts.exception.exceptions.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msproducts.repository.CategoryRepository;
 import github.romulomotadev.msproducts.repository.ProductRepository;
+import github.romulomotadev.msproducts.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,6 +50,26 @@ public class ProductService {
         product.setStock(stock);
 
         productRepository.save(product);
+
+        return new ProductDto(product);
+    }
+
+
+    //============ PUT ===============//
+
+    @Transactional
+    public ProductDto update (Long id, ProductMinDto dto){
+        Product product = productRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("not found product information with id: " + id));
+        product.setName(dto.getName());
+        product.setDescription(dto.getDescription());
+        product.setSku(dto.getSku());
+        product.setPrice(dto.getPrice());
+
+        Category category = categoryRepository.findById(dto.getCategoryId()).orElseThrow(
+                ()-> new ResourceNotFoundException("not found category information with product: "
+                        + dto.getCategoryId()));
+        product.setCategory(category);
 
         return new ProductDto(product);
     }
