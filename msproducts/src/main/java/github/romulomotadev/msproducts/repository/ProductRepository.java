@@ -26,4 +26,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                     "FROM TB_PRODUCT " +
                     "WHERE UPPER(TB_PRODUCT.NAME) LIKE UPPER('%' || :name || '%')")
     Page<Product> searchProductByName(@Param("name") String name, Pageable pageable);
+
+    // BUSCA TODOS PRODUTOS ATIVOS OU INATIVOS
+    @Query(nativeQuery = true,
+            value = "SELECT * " +
+            "FROM TB_PRODUCT " +
+            "WHERE TB_PRODUCT.ACTIVE = :status",
+            countQuery = "SELECT COUNT(*) " +
+                    "FROM TB_PRODUCT " +
+                    "WHERE TB_PRODUCT.ACTIVE = :status")
+    Page<Product> findAllProductsStatus(Boolean status, Pageable pageable);
+
 }

@@ -74,6 +74,20 @@ public class ProductController {
         return ResponseEntity.ok().body(dto);
     }
 
+    // BUSCA TODOS PRODUTOS ATIVOS OU INATIVOS
+    @GetMapping("/status")
+    public ResponseEntity<Page<ProductDto>> findAllProductsStatus(@RequestParam Boolean active, Pageable pageable){
+        Page<ProductDto> dto = productService.findAllProductsStatus(active, pageable);
+        return ResponseEntity.ok().body(dto);
+    }
 
+
+    //============ DELETE ===============//
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
+        productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

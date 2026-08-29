@@ -1,5 +1,6 @@
 package github.romulomotadev.msproducts.dto;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import github.romulomotadev.msproducts.entities.Product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import javax.net.ssl.SSLSession;
 
 @Data
 @NoArgsConstructor
+@JsonPropertyOrder( { "id", "sku", "name", "category", "description", "price", "active"})
 public class ProductMinDto {
 
     private Long id;
