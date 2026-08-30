@@ -2,6 +2,7 @@ package github.romulomotadev.msproducts.controller;
 
 import github.romulomotadev.msproducts.dto.StockDto;
 import github.romulomotadev.msproducts.service.StockService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class StockController {
 
     //UPDATE STOCK
     @PutMapping(value = "/{id}")
-    public ResponseEntity <StockDto> updateStock(@PathVariable Long id, @RequestBody StockDto stockDto) {
+    public ResponseEntity <StockDto> updateStock(@PathVariable Long id, @Valid @RequestBody StockDto stockDto) {
         StockDto dto = stockService.update(stockDto, id);
         return ResponseEntity.ok(dto);
     }

@@ -2,6 +2,7 @@ package github.romulomotadev.msproducts.dto;
 
 import github.romulomotadev.msproducts.entities.Product;
 import github.romulomotadev.msproducts.entities.Stock;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +11,9 @@ import lombok.NoArgsConstructor;
 public class StockDto {
 
     private Long id;
+    @Positive(message = "Quantity must be positive")
     private Integer quantity;
+    @Positive(message = "Minimum quantity must be positive")
     private Integer minQuantity;
 
 

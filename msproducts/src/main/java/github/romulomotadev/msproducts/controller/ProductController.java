@@ -3,6 +3,7 @@ package github.romulomotadev.msproducts.controller;
 import github.romulomotadev.msproducts.dto.ProductDto;
 import github.romulomotadev.msproducts.dto.ProductMinDto;
 import github.romulomotadev.msproducts.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +24,7 @@ public class ProductController {
     //============ POST ===============//
 
     @PostMapping
-    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductMinDto productDto){
+    public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductMinDto productDto){
         ProductDto dto = productService.save(productDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
@@ -32,7 +33,7 @@ public class ProductController {
     //============ PUT ===============//
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductMinDto dto){
+    public ResponseEntity<ProductDto> update(@PathVariable Long id, @Valid @RequestBody ProductMinDto dto){
         ProductDto dtoUpdated = productService.update(id, dto);
         return ResponseEntity.ok().body(dtoUpdated);
     }

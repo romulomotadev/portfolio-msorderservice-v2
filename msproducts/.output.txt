@@ -12,19 +12,13 @@ Command output:
 [INFO] Copying 0 resource from src\main\resources to target\classes
 [INFO] 
 [INFO] --- compiler:3.15.0:compile (default-compile) @ msproducts ---
-[INFO] Recompiling the module because of changed source code.
-[INFO] Compiling 23 source files with javac [debug parameters release 25] to target\classes
-WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
-WARNING: sun.misc.Unsafe::objectFieldOffset has been called by lombok.permit.Permit
-WARNING: Please consider reporting this to the maintainers of class lombok.permit.Permit
-WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+[INFO] Nothing to compile - all classes are up to date.
 [INFO] 
 [INFO] --- resources:3.5.0:testResources (default-testResources) @ msproducts ---
 [INFO] skip non existing resourceDirectory D:\OneDrive\Programacao\03_Projetos\01_ProjetosPessoais\Portifolio\portfolio_msorderservice_v2\msproducts\src\test\resources
 [INFO] 
 [INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ msproducts ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 3 source files with javac [debug parameters release 25] to target\test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO] 
 [INFO] --- surefire:3.5.6:test (default-test) @ msproducts ---
 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
@@ -32,12 +26,15 @@ WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
 [INFO] -------------------------------------------------------
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
+[INFO] Running github.romulomotadev.msproducts.dto.ProductMinDtoTest
+21:22:57.933 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 9.1.0.Final
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.393 s -- in github.romulomotadev.msproducts.dto.ProductMinDtoTest
 [INFO] Running github.romulomotadev.msproducts.MsproductsApplicationTests
-17:36:21.241 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [github.romulomotadev.msproducts.MsproductsApplicationTests]: MsproductsApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-17:36:21.347 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.MsproductsApplicationTests
-17:36:21.446 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [github.romulomotadev.msproducts.MsproductsApplicationTests]: MsproductsApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-17:36:21.448 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.MsproductsApplicationTests
-17:36:21.684 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+21:22:58.301 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [github.romulomotadev.msproducts.MsproductsApplicationTests]: MsproductsApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:22:58.385 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.MsproductsApplicationTests
+21:22:58.445 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [github.romulomotadev.msproducts.MsproductsApplicationTests]: MsproductsApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:22:58.446 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.MsproductsApplicationTests
+21:22:58.658 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -48,18 +45,18 @@ WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
 
  :: Spring Boot ::                (v4.1.0)
 
-2026-08-26T17:36:21.991-03:00  INFO 20764 --- [msproducts] [           main] g.r.m.MsproductsApplicationTests         : Starting MsproductsApplicationTests using Java 25.0.4.1 with PID 20764 (started by Developer in D:\OneDrive\Programacao\03_Projetos\01_ProjetosPessoais\Portifolio\portfolio_msorderservice_v2\msproducts)
-2026-08-26T17:36:21.992-03:00  INFO 20764 --- [msproducts] [           main] g.r.m.MsproductsApplicationTests         : No active profile set, falling back to 1 default profile: "default"
-2026-08-26T17:36:22.644-03:00  INFO 20764 --- [msproducts] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-08-26T17:36:22.784-03:00  INFO 20764 --- [msproducts] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 127 ms. Found 3 JPA repository interfaces.
-2026-08-26T17:36:22.921-03:00  INFO 20764 --- [msproducts] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=35c4a98d-3cf5-3393-a5e6-d1767cb037f4
-2026-08-26T17:36:23.163-03:00  INFO 20764 --- [msproducts] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-08-26T17:36:23.348-03:00  INFO 20764 --- [msproducts] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
-2026-08-26T17:36:23.350-03:00  INFO 20764 --- [msproducts] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-08-26T17:36:23.379-03:00  INFO 20764 --- [msproducts] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-08-26T17:36:23.423-03:00  INFO 20764 --- [msproducts] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
-2026-08-26T17:36:23.767-03:00  INFO 20764 --- [msproducts] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-08-26T17:36:23.831-03:00  INFO 20764 --- [msproducts] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-08-29T21:22:58.922-03:00  INFO 8504 --- [msproducts] [           main] g.r.m.MsproductsApplicationTests         : Starting MsproductsApplicationTests using Java 25.0.4.1 with PID 8504 (started by Developer in D:\OneDrive\Programacao\03_Projetos\01_ProjetosPessoais\Portifolio\portfolio_msorderservice_v2\msproducts)
+2026-08-29T21:22:58.924-03:00  INFO 8504 --- [msproducts] [           main] g.r.m.MsproductsApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2026-08-29T21:22:59.586-03:00  INFO 8504 --- [msproducts] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-29T21:22:59.713-03:00  INFO 8504 --- [msproducts] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 117 ms. Found 3 JPA repository interfaces.
+2026-08-29T21:22:59.884-03:00  INFO 8504 --- [msproducts] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=35c4a98d-3cf5-3393-a5e6-d1767cb037f4
+2026-08-29T21:23:00.127-03:00  INFO 8504 --- [msproducts] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-08-29T21:23:00.296-03:00  INFO 8504 --- [msproducts] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-08-29T21:23:00.298-03:00  INFO 8504 --- [msproducts] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-08-29T21:23:00.327-03:00  INFO 8504 --- [msproducts] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-08-29T21:23:00.373-03:00  INFO 8504 --- [msproducts] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-08-29T21:23:00.743-03:00  INFO 8504 --- [msproducts] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-29T21:23:00.805-03:00  INFO 8504 --- [msproducts] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:h2:mem:testdb]
 	Database driver: H2 JDBC Driver
 	Database dialect: H2Dialect
@@ -71,59 +68,59 @@ WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-08-26T17:36:24.559-03:00  INFO 20764 --- [msproducts] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-08-26T17:36:24.599-03:00  INFO 20764 --- [msproducts] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-08-26T17:36:24.667-03:00  INFO 20764 --- [msproducts] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-08-26T17:36:24.983-03:00  WARN 20764 --- [msproducts] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-08-26T17:36:25.310-03:00  INFO 20764 --- [msproducts] [           main] o.s.b.h.a.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
-2026-08-26T17:36:25.443-03:00  INFO 20764 --- [msproducts] [           main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestClient.
-2026-08-26T17:36:25.489-03:00  WARN 20764 --- [msproducts] [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
-2026-08-26T17:36:25.511-03:00  INFO 20764 --- [msproducts] [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2026-08-26T17:36:25.532-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2026-08-26T17:36:25.534-03:00  INFO 20764 --- [msproducts] [           main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2026-08-26T17:36:25.541-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2026-08-26T17:36:25.542-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2026-08-26T17:36:25.542-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2026-08-26T17:36:25.542-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2026-08-26T17:36:25.542-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2026-08-26T17:36:25.543-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
-2026-08-26T17:36:25.543-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2026-08-26T17:36:25.854-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2026-08-26T17:36:25.855-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
-2026-08-26T17:36:25.856-03:00  INFO 20764 --- [msproducts] [           main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
-2026-08-26T17:36:25.858-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1787776585857 with initial instances count: 2
-2026-08-26T17:36:25.860-03:00  INFO 20764 --- [msproducts] [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application MSPRODUCTS with eureka with status UP
-2026-08-26T17:36:25.860-03:00  INFO 20764 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1787776585860, current=UP, previous=STARTING]
-2026-08-26T17:36:25.861-03:00  INFO 20764 --- [msproducts] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_MSPRODUCTS/msproducts:14d794e6527de09be48539a2007408f7: registering service...
-2026-08-26T17:36:25.869-03:00  INFO 20764 --- [msproducts] [           main] g.r.m.MsproductsApplicationTests         : Started MsproductsApplicationTests in 4.201 seconds (process running for 5.349)
-2026-08-26T17:36:25.894-03:00  INFO 20764 --- [msproducts] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_MSPRODUCTS/msproducts:14d794e6527de09be48539a2007408f7 - registration status: 204
+2026-08-29T21:23:01.565-03:00  INFO 8504 --- [msproducts] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-29T21:23:01.613-03:00  INFO 8504 --- [msproducts] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-29T21:23:01.678-03:00  INFO 8504 --- [msproducts] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-29T21:23:01.993-03:00  WARN 8504 --- [msproducts] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-29T21:23:02.670-03:00  INFO 8504 --- [msproducts] [           main] o.s.b.h.a.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-08-29T21:23:03.031-03:00  INFO 8504 --- [msproducts] [           main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestClient.
+2026-08-29T21:23:03.090-03:00  WARN 8504 --- [msproducts] [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-08-29T21:23:03.121-03:00  INFO 8504 --- [msproducts] [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2026-08-29T21:23:03.178-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2026-08-29T21:23:03.185-03:00  INFO 8504 --- [msproducts] [           main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-08-29T21:23:03.206-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2026-08-29T21:23:03.206-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2026-08-29T21:23:03.207-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2026-08-29T21:23:03.207-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2026-08-29T21:23:03.207-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2026-08-29T21:23:03.207-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2026-08-29T21:23:03.207-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2026-08-29T21:23:03.498-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2026-08-29T21:23:03.499-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2026-08-29T21:23:03.500-03:00  INFO 8504 --- [msproducts] [           main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-08-29T21:23:03.502-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1788049383501 with initial instances count: 2
+2026-08-29T21:23:03.505-03:00  INFO 8504 --- [msproducts] [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application MSPRODUCTS with eureka with status UP
+2026-08-29T21:23:03.505-03:00  INFO 8504 --- [msproducts] [           main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1788049383505, current=UP, previous=STARTING]
+2026-08-29T21:23:03.507-03:00  INFO 8504 --- [msproducts] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_MSPRODUCTS/msproducts:04a5a964c1d396dd692af30ca01b8ef4: registering service...
+2026-08-29T21:23:03.513-03:00  INFO 8504 --- [msproducts] [           main] g.r.m.MsproductsApplicationTests         : Started MsproductsApplicationTests in 4.867 seconds (process running for 6.295)
+2026-08-29T21:23:03.537-03:00  INFO 8504 --- [msproducts] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_MSPRODUCTS/msproducts:04a5a964c1d396dd692af30ca01b8ef4 - registration status: 204
 Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
 Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
 WARNING: A Java agent has been loaded dynamically (C:\Users\Developer\.m2\repository\net\bytebuddy\byte-buddy-agent\1.18.10\byte-buddy-agent-1.18.10.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
 WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.014 s -- in github.romulomotadev.msproducts.MsproductsApplicationTests
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.527 s -- in github.romulomotadev.msproducts.MsproductsApplicationTests
 [INFO] Running github.romulomotadev.msproducts.repository.ProductRepositoryTest
-2026-08-26T17:36:26.115-03:00  INFO 20764 --- [msproducts] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [github.romulomotadev.msproducts.repository.ProductRepositoryTest]: ProductRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-08-26T17:36:26.127-03:00  INFO 20764 --- [msproducts] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.repository.ProductRepositoryTest
-2026-08-26T17:36:26.128-03:00  INFO 20764 --- [msproducts] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [github.romulomotadev.msproducts.repository.ProductRepositoryTest]: ProductRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-08-26T17:36:26.129-03:00  INFO 20764 --- [msproducts] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.repository.ProductRepositoryTest
-[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.492 s -- in github.romulomotadev.msproducts.repository.ProductRepositoryTest
+2026-08-29T21:23:03.746-03:00  INFO 8504 --- [msproducts] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [github.romulomotadev.msproducts.repository.ProductRepositoryTest]: ProductRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-08-29T21:23:03.759-03:00  INFO 8504 --- [msproducts] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.repository.ProductRepositoryTest
+2026-08-29T21:23:03.760-03:00  INFO 8504 --- [msproducts] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [github.romulomotadev.msproducts.repository.ProductRepositoryTest]: ProductRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-08-29T21:23:03.761-03:00  INFO 8504 --- [msproducts] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.repository.ProductRepositoryTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.452 s -- in github.romulomotadev.msproducts.repository.ProductRepositoryTest
 [INFO] Running github.romulomotadev.msproducts.service.ProductServiceTest
-2026-08-26T17:36:26.607-03:00  INFO 20764 --- [msproducts] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [github.romulomotadev.msproducts.service.ProductServiceTest]: ProductServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-08-26T17:36:26.621-03:00  INFO 20764 --- [msproducts] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.service.ProductServiceTest
-2026-08-26T17:36:26.623-03:00  INFO 20764 --- [msproducts] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [github.romulomotadev.msproducts.service.ProductServiceTest]: ProductServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-08-26T17:36:26.624-03:00  INFO 20764 --- [msproducts] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.service.ProductServiceTest
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in github.romulomotadev.msproducts.service.ProductServiceTest
+2026-08-29T21:23:04.201-03:00  INFO 8504 --- [msproducts] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [github.romulomotadev.msproducts.service.ProductServiceTest]: ProductServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-08-29T21:23:04.216-03:00  INFO 8504 --- [msproducts] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.service.ProductServiceTest
+2026-08-29T21:23:04.217-03:00  INFO 8504 --- [msproducts] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [github.romulomotadev.msproducts.service.ProductServiceTest]: ProductServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-08-29T21:23:04.218-03:00  INFO 8504 --- [msproducts] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration github.romulomotadev.msproducts.MsproductsApplication for test class github.romulomotadev.msproducts.service.ProductServiceTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in github.romulomotadev.msproducts.service.ProductServiceTest
 [INFO] 
 [INFO] Results:
 [INFO] 
-[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
 [INFO] 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  13.622 s
-[INFO] Finished at: 2026-08-26T17:36:29-03:00
+[INFO] Total time:  12.056 s
+[INFO] Finished at: 2026-08-29T21:23:07-03:00
 [INFO] ------------------------------------------------------------------------

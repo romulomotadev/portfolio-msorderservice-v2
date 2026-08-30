@@ -5,6 +5,7 @@ import github.romulomotadev.msproducts.dto.error.ValidateErrorDto;
 import github.romulomotadev.msproducts.exception.exceptions.exceptions.DataDuplicateException;
 import github.romulomotadev.msproducts.exception.exceptions.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -44,6 +45,19 @@ public class ControllerExceptionHandler {
             err.addError(f.getField(), f.getDefaultMessage());
         }
 
+        return ResponseEntity.status(status).body(err);
+    }
+
+    //TRATANDO DADOS DUPLICADOS
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    private ResponseEntity<CustomErrorDto> dataIntegrityViolationException(DataIntegrityViolationException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.CONFLICT;
+        CustomErrorDto err = new CustomErrorDto(
+                Instant.now(),
+                status.value(),
+                "Integrity constraint violation",
+                request.getRequestURI()
+        );
         return ResponseEntity.status(status).body(err);
     }
 

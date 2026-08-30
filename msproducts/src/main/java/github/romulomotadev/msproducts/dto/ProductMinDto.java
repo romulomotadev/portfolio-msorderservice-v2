@@ -2,10 +2,9 @@ package github.romulomotadev.msproducts.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import github.romulomotadev.msproducts.entities.Product;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.net.ssl.SSLSession;
 
 @Data
 @NoArgsConstructor
@@ -13,10 +12,15 @@ import javax.net.ssl.SSLSession;
 public class ProductMinDto {
 
     private Long id;
+    @NotBlank(message = "Name is required")
     private String name;
+    @NotBlank(message = "Description is required")
     private String description;
+    @NotBlank(message = "SKU is required")
     private String sku;
+    @Positive(message = "Price must be positive")
     private Double price;
+    @NotNull(message = "Active is required")
     private Boolean active;
     private Long categoryId;
 
