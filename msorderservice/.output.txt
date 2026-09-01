@@ -1,0 +1,102 @@
+Command finished with exit code 0.
+Command output:
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< github.romulomotadev:msorderservice >-----------------
+[INFO] Building msorderservice 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ msorderservice ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ msorderservice ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 10 source files with javac [debug parameters release 25] to target\classes
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by lombok.permit.Permit
+WARNING: Please consider reporting this to the maintainers of class lombok.permit.Permit
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ msorderservice ---
+[INFO] skip non existing resourceDirectory D:\OneDrive\Programacao\03_Projetos\01_ProjetosPessoais\Portifolio\portfolio_msorderservice_v2\msorderservice\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ msorderservice ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [debug parameters release 25] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ msorderservice ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running github.romulomotadev.msorderservice.MsorderserviceApplicationTests
+14:35:30.644 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [github.romulomotadev.msorderservice.MsorderserviceApplicationTests]: MsorderserviceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:35:30.801 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration github.romulomotadev.msorderservice.MsorderserviceApplication for test class github.romulomotadev.msorderservice.MsorderserviceApplicationTests
+14:35:30.878 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [github.romulomotadev.msorderservice.MsorderserviceApplicationTests]: MsorderserviceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:35:30.880 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration github.romulomotadev.msorderservice.MsorderserviceApplication for test class github.romulomotadev.msorderservice.MsorderserviceApplicationTests
+14:35:31.202 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-09-01T14:35:31.790-03:00  INFO 15672 --- [msorderservice] [           main] g.r.m.MsorderserviceApplicationTests     : Starting MsorderserviceApplicationTests using Java 25.0.4.1 with PID 15672 (started by Developer in D:\OneDrive\Programacao\03_Projetos\01_ProjetosPessoais\Portifolio\portfolio_msorderservice_v2\msorderservice)
+2026-09-01T14:35:31.793-03:00  INFO 15672 --- [msorderservice] [           main] g.r.m.MsorderserviceApplicationTests     : No active profile set, falling back to 1 default profile: "default"
+2026-09-01T14:35:32.492-03:00  INFO 15672 --- [msorderservice] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-01T14:35:32.513-03:00  INFO 15672 --- [msorderservice] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 0 JPA repository interfaces.
+2026-09-01T14:35:32.675-03:00  INFO 15672 --- [msorderservice] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=ace1f38e-a2ae-320b-8be5-5b487211026d
+2026-09-01T14:35:33.023-03:00  INFO 15672 --- [msorderservice] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-01T14:35:33.206-03:00  INFO 15672 --- [msorderservice] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-09-01T14:35:33.209-03:00  INFO 15672 --- [msorderservice] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-01T14:35:33.266-03:00  INFO 15672 --- [msorderservice] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-09-01T14:35:33.326-03:00  INFO 15672 --- [msorderservice] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-09-01T14:35:33.691-03:00  INFO 15672 --- [msorderservice] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-01T14:35:33.754-03:00  INFO 15672 --- [msorderservice] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:testdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TESTDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-09-01T14:35:34.111-03:00  INFO 15672 --- [msorderservice] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-01T14:35:34.132-03:00  INFO 15672 --- [msorderservice] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-01T14:35:34.260-03:00  WARN 15672 --- [msorderservice] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-01T14:35:34.398-03:00  INFO 15672 --- [msorderservice] [           main] o.s.c.openfeign.FeignClientFactoryBean   : For 'msclients' URL not provided. Will try picking an instance via load-balancing.
+2026-09-01T14:35:34.456-03:00  INFO 15672 --- [msorderservice] [           main] o.s.c.openfeign.FeignClientFactoryBean   : For 'msproducts' URL not provided. Will try picking an instance via load-balancing.
+2026-09-01T14:35:34.820-03:00  INFO 15672 --- [msorderservice] [           main] o.s.b.h.a.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-09-01T14:35:34.953-03:00  INFO 15672 --- [msorderservice] [           main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestClient.
+2026-09-01T14:35:34.988-03:00  WARN 15672 --- [msorderservice] [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-09-01T14:35:35.016-03:00  INFO 15672 --- [msorderservice] [           main] g.r.m.MsorderserviceApplicationTests     : Started MsorderserviceApplicationTests in 3.836 seconds (process running for 5.111)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (C:\Users\Developer\.m2\repository\net\bytebuddy\byte-buddy-agent\1.18.11\byte-buddy-agent-1.18.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.952 s -- in github.romulomotadev.msorderservice.MsorderserviceApplicationTests
+[INFO] Running github.romulomotadev.msorderservice.service.OrderServiceTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.201 s -- in github.romulomotadev.msorderservice.service.OrderServiceTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.142 s
+[INFO] Finished at: 2026-09-01T14:35:35-03:00
+[INFO] ------------------------------------------------------------------------

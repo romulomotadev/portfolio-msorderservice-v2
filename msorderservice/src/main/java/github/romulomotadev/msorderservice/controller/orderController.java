@@ -1,9 +1,10 @@
 package github.romulomotadev.msorderservice.controller;
 
-import github.romulomotadev.msorderservice.dto.ClientResponseDto;
-import github.romulomotadev.msorderservice.dto.DataResponseDTO;
+import github.romulomotadev.msorderservice.dto.ClientDataResponseDTO;
+import github.romulomotadev.msorderservice.dto.ProductDataResponseDTO;
 import github.romulomotadev.msorderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +21,20 @@ public class orderController {
 
     //================== GET ====================
 
+    // RESPONSE CLIENT
     @GetMapping("/document")
-    public ResponseEntity<DataResponseDTO> clienteResponse(@RequestParam String document){
-        DataResponseDTO clientResponseDto = orderService.getClientResponse(document);
+    public ResponseEntity<ClientDataResponseDTO> clienteResponse(
+            @RequestParam String document){
+        ClientDataResponseDTO clientResponseDto = orderService.getClientResponse(document);
         return ResponseEntity.ok(clientResponseDto);
+    }
+
+    // RESPONSE PRODUCT
+    @GetMapping("/search")
+    public ResponseEntity<ProductDataResponseDTO> searchProductByName(
+            @RequestParam String name, Pageable pageable){
+        ProductDataResponseDTO productResponseDto = orderService.getProductResponse(name, pageable);
+        return ResponseEntity.ok(productResponseDto);
     }
 
 }
