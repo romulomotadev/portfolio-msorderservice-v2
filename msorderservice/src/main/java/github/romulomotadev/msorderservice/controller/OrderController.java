@@ -1,25 +1,23 @@
 package github.romulomotadev.msorderservice.controller;
 
 import github.romulomotadev.msorderservice.dto.ClientDataResponseDTO;
+import github.romulomotadev.msorderservice.dto.OrderDto;
 import github.romulomotadev.msorderservice.dto.ProductDataResponseDTO;
 import github.romulomotadev.msorderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
-public class orderController {
+public class OrderController {
 
     private final OrderService orderService;
 
 
-    //================== GET ====================
+    //============ GET ===============//
 
     // RESPONSE CLIENT
     @GetMapping("/document")
@@ -36,5 +34,15 @@ public class orderController {
         ProductDataResponseDTO productResponseDto = orderService.getProductResponse(name, pageable);
         return ResponseEntity.ok(productResponseDto);
     }
+
+
+    //============ POST ===============//
+
+    @PostMapping
+    public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto){
+        OrderDto orderDtoResponse = orderService.createOrder(orderDto);
+        return ResponseEntity.ok(orderDtoResponse);
+    }
+
 
 }
