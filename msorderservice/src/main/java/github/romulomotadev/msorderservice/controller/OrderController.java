@@ -5,9 +5,13 @@ import github.romulomotadev.msorderservice.dto.OrderDto;
 import github.romulomotadev.msorderservice.dto.ProductDataResponseDTO;
 import github.romulomotadev.msorderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/orders")
@@ -35,13 +39,28 @@ public class OrderController {
         return ResponseEntity.ok(productResponseDto);
     }
 
+    // FIND BY ID
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderDto> findById(@PathVariable Long id){
+        OrderDto orderDto = orderService.findById(id);
+        return ResponseEntity.ok(orderDto);
+    }
+
+    // FIND ALL
+    @GetMapping
+    public ResponseEntity<Page<OrderDto>> findAll(Pageable pageable){
+        Page<OrderDto> orderDtoPage = orderService.findAll(pageable);
+        return ResponseEntity.ok(orderDtoPage);
+    }
+
 
     //============ POST ===============//
 
     @PostMapping
     public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto){
-        OrderDto orderDtoResponse = orderService.createOrder(orderDto);
-        return ResponseEntity.ok(orderDtoResponse);
+        OrderDto dto = orderService.createOrder(orderDto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+        return ResponseEntity.created(uri).body(dto);
     }
 
 

@@ -43,7 +43,6 @@ public class OrderService {
                 .build();
     }
 
-
     //RESPONSE PRODUCT
     public ProductDataResponseDTO getProductResponse(String name, Pageable pageable) {
 
@@ -53,6 +52,19 @@ public class OrderService {
                 .builder()
                 .productResponseDto(productResponseDto.getBody())
                 .build();
+    }
+
+    // FIND BY ID
+    public OrderDto findById(Long id) {
+        Order order = orderRepository.findById(id).orElseThrow(
+                ()-> new ResourceNotFoundException("Order not found with id: " + id));
+        return new OrderDto(order);
+    }
+
+    // FIND ALL
+    public Page<OrderDto> findAll(Pageable pageable) {
+        Page<Order> orders = orderRepository.findAll(pageable);
+        return orders.map(OrderDto::new);
     }
 
 
