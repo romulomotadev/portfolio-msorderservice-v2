@@ -1,4 +1,4 @@
-package github.romulomotadev.msorderservice.repository;
+package github.romulomotadev.msorderservice.response;
 
 import github.romulomotadev.msorderservice.dto.ClientResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;

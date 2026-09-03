@@ -53,6 +53,20 @@ public class OrderController {
         return ResponseEntity.ok(orderDtoPage);
     }
 
+    // FIND BY ORDERS FOR STATUS
+    @GetMapping("/status")
+    public ResponseEntity<Page<OrderDto>> findByStatus(@RequestParam String status, Pageable pageable){
+        Page<OrderDto> orderDtoPage = orderService.findByStatus(status, pageable);
+        return ResponseEntity.ok(orderDtoPage);
+    }
+
+    // FIND BY ORDER FOR CLIENT
+    @GetMapping("/clientName")
+    public ResponseEntity<Page<OrderDto>> findByClient(@RequestParam String clientName, Pageable pageable){
+        Page<OrderDto> orderDtoPage = orderService.findByClient(clientName, pageable);
+        return ResponseEntity.ok(orderDtoPage);
+    }
+
 
     //============ POST ===============//
 

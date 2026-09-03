@@ -14,7 +14,7 @@ spring:
       path: /h2-console
 
 server:
-  port: 0
+  port: 8081
 
 eureka:
   client:

@@ -5,9 +5,9 @@ import github.romulomotadev.msorderservice.entities.Order;
 import github.romulomotadev.msorderservice.entities.OrderItem;
 import github.romulomotadev.msorderservice.entities.RequestStatus;
 import github.romulomotadev.msorderservice.exception.exceptions.ResourceNotFoundException;
-import github.romulomotadev.msorderservice.repository.ClientResponse;
+import github.romulomotadev.msorderservice.response.ClientResponse;
 import github.romulomotadev.msorderservice.repository.OrderRepository;
-import github.romulomotadev.msorderservice.repository.ProductResponse;
+import github.romulomotadev.msorderservice.response.ProductResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -67,7 +67,19 @@ public class OrderService {
         return orders.map(OrderDto::new);
     }
 
+    // FIND BY ORDERS FOR STATUS
+    public Page<OrderDto> findByStatus(String status, Pageable pageable) {
+        Page<Order> ordersStatus = orderRepository.findByStatus(status, pageable);
+        return ordersStatus.map(OrderDto::new);
+    }
 
+    // FIND BY ORDER FOR CLIENT
+    public Page<OrderDto> findByClient(String clientName, Pageable pageable) {
+        Page<Order> ordersClient = orderRepository.findByClient(clientName, pageable);
+        return ordersClient.map(OrderDto::new);
+    }
+
+    
     //============ POST ===============//
 
     @Transactional
@@ -123,4 +135,5 @@ public class OrderService {
 
         return new OrderDto(savedOrder);
     }
+
 }
