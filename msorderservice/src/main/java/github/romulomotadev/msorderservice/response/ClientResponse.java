@@ -12,5 +12,5 @@ public interface ClientResponse {
 
     @GetMapping(value = "/document")
     ResponseEntity<ClientResponseDto> findByPersonDocument(
-            @RequestParam String document);
+            @RequestParam("document") String document);
 }

@@ -26,7 +26,7 @@ public class OrderController {
     // RESPONSE CLIENT
     @GetMapping("/document")
     public ResponseEntity<ClientDataResponseDTO> clienteResponse(
-            @RequestParam String document){
+            @RequestParam("document") String document){
         ClientDataResponseDTO clientResponseDto = orderService.getClientResponse(document);
         return ResponseEntity.ok(clientResponseDto);
     }
@@ -34,14 +34,14 @@ public class OrderController {
     // RESPONSE PRODUCT
     @GetMapping("/search")
     public ResponseEntity<ProductDataResponseDTO> searchProductByName(
-            @RequestParam String name, Pageable pageable){
+            @RequestParam("name") String name, Pageable pageable){
         ProductDataResponseDTO productResponseDto = orderService.getProductResponse(name, pageable);
         return ResponseEntity.ok(productResponseDto);
     }
 
     // FIND BY ID
     @GetMapping("/{id}")
-    public ResponseEntity<OrderDto> findById(@PathVariable Long id){
+    public ResponseEntity<OrderDto> findById(@PathVariable("id") Long id){
         OrderDto orderDto = orderService.findById(id);
         return ResponseEntity.ok(orderDto);
     }
@@ -55,14 +55,14 @@ public class OrderController {
 
     // FIND BY ORDERS FOR STATUS
     @GetMapping("/status")
-    public ResponseEntity<Page<OrderDto>> findByStatus(@RequestParam String status, Pageable pageable){
+    public ResponseEntity<Page<OrderDto>> findByStatus(@RequestParam("status") String status, Pageable pageable){
         Page<OrderDto> orderDtoPage = orderService.findByStatus(status, pageable);
         return ResponseEntity.ok(orderDtoPage);
     }
 
     // FIND BY ORDER FOR CLIENT
     @GetMapping("/clientName")
-    public ResponseEntity<Page<OrderDto>> findByClient(@RequestParam String clientName, Pageable pageable){
+    public ResponseEntity<Page<OrderDto>> findByClient(@RequestParam("clientName") String clientName, Pageable pageable){
         Page<OrderDto> orderDtoPage = orderService.findByClient(clientName, pageable);
         return ResponseEntity.ok(orderDtoPage);
     }

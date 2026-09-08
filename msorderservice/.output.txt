@@ -1,0 +1,337 @@
+Command did not complete within the 45s timeout you specified and was forcibly terminated by the system. 
+The command did not fail or crash — it was killed because it exceeded the time limit. 
+If your command needs more time, retry the command and increase the `timeout` parameter value.
+Command output:
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< github.romulomotadev:msorderservice >-----------------
+[INFO] Building msorderservice 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.1.1:run (default-cli) > test-compile @ msorderservice >>>
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ msorderservice ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ msorderservice ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ msorderservice ---
+[INFO] skip non existing resourceDirectory D:\OneDrive\Programacao\03_Projetos\01_ProjetosPessoais\Portifolio\portfolio-msorderservice-v2\msorderservice\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ msorderservice ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:4.1.1:run (default-cli) < test-compile @ msorderservice <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.1.1:run (default-cli) @ msorderservice ---
+Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-buildpack-platform/4.1.1/spring-boot-buildpack-platform-4.1.1.jar
+Progress (1): 0.9/333 kB
+Progress (1): 2.3/333 kB
+Progress (1): 3.6/333 kB
+Progress (1): 5.0/333 kB
+Progress (1): 6.4/333 kB
+Progress (1): 7.7/333 kB
+Progress (1): 8.2/333 kB
+Progress (1): 9.6/333 kB
+Progress (1): 11/333 kB 
+Progress (1): 12/333 kB
+Progress (1): 14/333 kB
+Progress (1): 15/333 kB
+Progress (1): 16/333 kB
+Progress (1): 18/333 kB
+Progress (1): 19/333 kB
+Progress (1): 21/333 kB
+Progress (1): 22/333 kB
+Progress (1): 23/333 kB
+Progress (1): 25/333 kB
+Progress (1): 26/333 kB
+Progress (1): 27/333 kB
+Progress (1): 29/333 kB
+Progress (1): 30/333 kB
+Progress (1): 31/333 kB
+Progress (1): 33/333 kB
+Progress (1): 34/333 kB
+Progress (1): 36/333 kB
+Progress (1): 37/333 kB
+Progress (1): 38/333 kB
+Progress (1): 40/333 kB
+Progress (1): 41/333 kB
+Progress (1): 42/333 kB
+Progress (1): 44/333 kB
+Progress (1): 45/333 kB
+Progress (1): 46/333 kB
+Progress (1): 48/333 kB
+Progress (1): 49/333 kB
+Progress (1): 51/333 kB
+Progress (1): 52/333 kB
+Progress (1): 53/333 kB
+Progress (1): 55/333 kB
+Progress (1): 57/333 kB
+Progress (1): 62/333 kB
+Progress (1): 66/333 kB
+Progress (1): 70/333 kB
+Progress (1): 74/333 kB
+Progress (1): 78/333 kB
+Progress (1): 82/333 kB
+Progress (1): 86/333 kB
+Progress (1): 90/333 kB
+Progress (1): 95/333 kB
+Progress (1): 99/333 kB
+Progress (1): 103/333 kB
+Progress (1): 107/333 kB
+Progress (1): 112/333 kB
+Progress (1): 115/333 kB
+Progress (1): 119/333 kB
+Progress (1): 123/333 kB
+Progress (1): 127/333 kB
+Progress (1): 132/333 kB
+Progress (1): 136/333 kB
+Progress (1): 139/333 kB
+Progress (1): 143/333 kB
+Progress (1): 148/333 kB
+Progress (1): 152/333 kB
+Progress (1): 156/333 kB
+Progress (1): 160/333 kB
+Progress (1): 164/333 kB
+Progress (1): 168/333 kB
+Progress (1): 173/333 kB
+Progress (1): 177/333 kB
+Progress (1): 180/333 kB
+Progress (1): 184/333 kB
+Progress (1): 189/333 kB
+Progress (1): 193/333 kB
+Progress (1): 197/333 kB
+Progress (1): 201/333 kB
+Progress (1): 206/333 kB
+Progress (1): 210/333 kB
+Progress (1): 214/333 kB
+Progress (1): 218/333 kB
+Progress (1): 235/333 kB
+Progress (1): 251/333 kB
+Progress (1): 267/333 kB
+Progress (1): 284/333 kB
+Progress (1): 300/333 kB
+Progress (1): 311/333 kB
+Progress (1): 328/333 kB
+Progress (1): 333 kB    
+                    
+Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-buildpack-platform/4.1.1/spring-boot-buildpack-platform-4.1.1.jar (333 kB at 611 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-loader-tools/4.1.1/spring-boot-loader-tools-4.1.1.jar
+Downloading from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-observation/1.16.7/micrometer-observation-1.16.7.jar
+Downloading from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-commons/1.16.7/micrometer-commons-1.16.7.jar
+Progress (1): 7.7/84 kB
+Progress (1): 8.2/84 kB
+Progress (1): 25/84 kB 
+Progress (1): 41/84 kB
+Progress (1): 57/84 kB
+Progress (1): 74/84 kB
+Progress (1): 84 kB   
+                   
+Downloaded from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-observation/1.16.7/micrometer-observation-1.16.7.jar (84 kB at 1.9 MB/s)
+Progress (1): 0.9/52 kB
+Progress (1): 2.3/52 kB
+Progress (1): 3.6/52 kB
+Progress (1): 5.0/52 kB
+Progress (1): 6.4/52 kB
+Progress (1): 7.7/52 kB
+Progress (1): 9.1/52 kB
+Progress (1): 10/52 kB 
+Progress (1): 12/52 kB
+Progress (1): 13/52 kB
+Progress (1): 15/52 kB
+Progress (1): 16/52 kB
+Progress (1): 17/52 kB
+Progress (1): 19/52 kB
+Progress (1): 20/52 kB
+Progress (1): 21/52 kB
+Progress (1): 23/52 kB
+Progress (1): 24/52 kB
+Progress (1): 26/52 kB
+Progress (1): 27/52 kB
+Progress (1): 28/52 kB
+Progress (1): 30/52 kB
+Progress (1): 31/52 kB
+Progress (1): 32/52 kB
+Progress (1): 34/52 kB
+Progress (1): 35/52 kB
+Progress (1): 36/52 kB
+Progress (1): 38/52 kB
+Progress (1): 39/52 kB
+Progress (1): 41/52 kB
+Progress (1): 42/52 kB
+Progress (1): 43/52 kB
+Progress (1): 45/52 kB
+Progress (1): 46/52 kB
+Progress (1): 47/52 kB
+Progress (1): 49/52 kB
+Progress (1): 50/52 kB
+Progress (1): 52/52 kB
+Progress (1): 52 kB   
+                   
+Downloaded from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-commons/1.16.7/micrometer-commons-1.16.7.jar (52 kB at 681 kB/s)
+Progress (1): 0.9/342 kB
+Progress (1): 2.3/342 kB
+Progress (1): 3.6/342 kB
+Progress (1): 5.0/342 kB
+Progress (1): 6.4/342 kB
+Progress (1): 7.7/342 kB
+Progress (1): 9.1/342 kB
+Progress (1): 10/342 kB 
+Progress (1): 12/342 kB
+Progress (1): 13/342 kB
+Progress (1): 15/342 kB
+Progress (1): 16/342 kB
+Progress (1): 17/342 kB
+Progress (1): 19/342 kB
+Progress (1): 20/342 kB
+Progress (1): 21/342 kB
+Progress (1): 23/342 kB
+Progress (1): 24/342 kB
+Progress (1): 26/342 kB
+Progress (1): 27/342 kB
+Progress (1): 28/342 kB
+Progress (1): 30/342 kB
+Progress (1): 31/342 kB
+Progress (1): 32/342 kB
+Progress (1): 34/342 kB
+Progress (1): 35/342 kB
+Progress (1): 36/342 kB
+Progress (1): 38/342 kB
+Progress (1): 39/342 kB
+Progress (1): 41/342 kB
+Progress (1): 42/342 kB
+Progress (1): 43/342 kB
+Progress (1): 45/342 kB
+Progress (1): 46/342 kB
+Progress (1): 47/342 kB
+Progress (1): 49/342 kB
+Progress (1): 50/342 kB
+Progress (1): 52/342 kB
+Progress (1): 53/342 kB
+Progress (1): 54/342 kB
+Progress (1): 56/342 kB
+Progress (1): 57/342 kB
+Progress (1): 61/342 kB
+Progress (1): 65/342 kB
+Progress (1): 70/342 kB
+Progress (1): 74/342 kB
+Progress (1): 78/342 kB
+Progress (1): 82/342 kB
+Progress (1): 86/342 kB
+Progress (1): 91/342 kB
+Progress (1): 93/342 kB
+Progress (1): 98/342 kB
+Progress (1): 102/342 kB
+Progress (1): 106/342 kB
+Progress (1): 110/342 kB
+Progress (1): 115/342 kB
+Progress (1): 119/342 kB
+Progress (1): 122/342 kB
+Progress (1): 127/342 kB
+Progress (1): 131/342 kB
+Progress (1): 135/342 kB
+Progress (1): 139/342 kB
+Progress (1): 144/342 kB
+Progress (1): 148/342 kB
+Progress (1): 152/342 kB
+Progress (1): 156/342 kB
+Progress (1): 160/342 kB
+Progress (1): 165/342 kB
+Progress (1): 169/342 kB
+Progress (1): 173/342 kB
+Progress (1): 177/342 kB
+Progress (1): 182/342 kB
+Progress (1): 186/342 kB
+Progress (1): 190/342 kB
+Progress (1): 194/342 kB
+Progress (1): 199/342 kB
+Progress (1): 203/342 kB
+Progress (1): 207/342 kB
+Progress (1): 211/342 kB
+Progress (1): 215/342 kB
+Progress (1): 220/342 kB
+Progress (1): 236/342 kB
+Progress (1): 252/342 kB
+Progress (1): 253/342 kB
+Progress (1): 270/342 kB
+Progress (1): 286/342 kB
+Progress (1): 303/342 kB
+Progress (1): 319/342 kB
+Progress (1): 335/342 kB
+Progress (1): 342 kB    
+                    
+Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-loader-tools/4.1.1/spring-boot-loader-tools-4.1.1.jar (342 kB at 2.5 MB/s)
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-09-08T12:55:48.853-03:00  INFO 12732 --- [msorderservice] [  restartedMain] g.r.m.MsorderserviceApplication          : Starting MsorderserviceApplication using Java 25.0.4.1 with PID 12732 (D:\OneDrive\Programacao\03_Projetos\01_ProjetosPessoais\Portifolio\portfolio-msorderservice-v2\msorderservice\target\classes started by Developer in D:\OneDrive\Programacao\03_Projetos\01_ProjetosPessoais\Portifolio\portfolio-msorderservice-v2\msorderservice)
+2026-09-08T12:55:48.855-03:00  INFO 12732 --- [msorderservice] [  restartedMain] g.r.m.MsorderserviceApplication          : No active profile set, falling back to 1 default profile: "default"
+2026-09-08T12:55:48.895-03:00  INFO 12732 --- [msorderservice] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-09-08T12:55:48.895-03:00  INFO 12732 --- [msorderservice] [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-09-08T12:55:49.365-03:00  INFO 12732 --- [msorderservice] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-08T12:55:49.466-03:00  INFO 12732 --- [msorderservice] [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 94 ms. Found 2 JPA repository interfaces.
+2026-09-08T12:55:49.586-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=ef971888-58f6-3433-8ea7-a21f0d700c0b
+2026-09-08T12:55:49.912-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2026-09-08T12:55:49.927-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-08T12:55:49.927-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-08T12:55:49.961-03:00  INFO 12732 --- [msorderservice] [  restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1066 ms
+2026-09-08T12:55:50.077-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-08T12:55:50.192-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-09-08T12:55:50.193-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-09-08T12:55:50.218-03:00  INFO 12732 --- [msorderservice] [  restartedMain] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-09-08T12:55:50.249-03:00  INFO 12732 --- [msorderservice] [  restartedMain] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-09-08T12:55:50.493-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-08T12:55:50.547-03:00  INFO 12732 --- [msorderservice] [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:testdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TESTDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-09-08T12:55:51.137-03:00  INFO 12732 --- [msorderservice] [  restartedMain] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-08T12:55:51.171-03:00  INFO 12732 --- [msorderservice] [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-08T12:55:51.234-03:00  WARN 12732 --- [msorderservice] [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-08T12:55:51.315-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.s.c.openfeign.FeignClientFactoryBean   : For 'msclients' URL not provided. Will try picking an instance via load-balancing.
+2026-09-08T12:55:51.359-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.s.c.openfeign.FeignClientFactoryBean   : For 'msproducts' URL not provided. Will try picking an instance via load-balancing.
+2026-09-08T12:55:51.391-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-08T12:55:51.661-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.s.b.h.a.H2ConsoleAutoConfiguration     : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-09-08T12:55:51.718-03:00  INFO 12732 --- [msorderservice] [  restartedMain] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestClient.
+2026-09-08T12:55:51.732-03:00  WARN 12732 --- [msorderservice] [  restartedMain] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-09-08T12:55:51.747-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2026-09-08T12:55:51.762-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2026-09-08T12:55:51.765-03:00  INFO 12732 --- [msorderservice] [  restartedMain] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-09-08T12:55:51.770-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2026-09-08T12:55:51.770-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2026-09-08T12:55:51.770-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2026-09-08T12:55:51.770-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2026-09-08T12:55:51.770-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2026-09-08T12:55:51.770-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2026-09-08T12:55:51.770-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2026-09-08T12:55:52.009-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2026-09-08T12:55:52.010-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2026-09-08T12:55:52.012-03:00  INFO 12732 --- [msorderservice] [  restartedMain] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-09-08T12:55:52.014-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1788882952013 with initial instances count: 3
+2026-09-08T12:55:52.016-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application MSORDERSERVICE with eureka with status UP
+2026-09-08T12:55:52.017-03:00  INFO 12732 --- [msorderservice] [  restartedMain] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1788882952017, current=UP, previous=STARTING]
+2026-09-08T12:55:52.018-03:00  INFO 12732 --- [msorderservice] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_MSORDERSERVICE/msorderservice:26252761ba844ab448b57754f16b7805: registering service...
+2026-09-08T12:55:52.030-03:00  INFO 12732 --- [msorderservice] [  restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2026-09-08T12:55:52.030-03:00  INFO 12732 --- [msorderservice] [  restartedMain] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8081
+2026-09-08T12:55:52.038-03:00  INFO 12732 --- [msorderservice] [  restartedMain] g.r.m.MsorderserviceApplication          : Started MsorderserviceApplication in 3.456 seconds (process running for 3.91)
+2026-09-08T12:55:52.044-03:00  INFO 12732 --- [msorderservice] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_MSORDERSERVICE/msorderservice:26252761ba844ab448b57754f16b7805 - registration status: 204

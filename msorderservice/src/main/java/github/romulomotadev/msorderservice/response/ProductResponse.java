@@ -2,6 +2,7 @@ package github.romulomotadev.msorderservice.response;
 
 import github.romulomotadev.msorderservice.dto.ProductResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -14,5 +15,5 @@ public interface ProductResponse {
 
     @GetMapping("/search")
     ResponseEntity<Page<ProductResponseDto>> searchProductByName(
-            @RequestParam String name, Pageable pageable);
+            @RequestParam("name") String name, @SpringQueryMap Pageable pageable);
 }
