@@ -2,8 +2,8 @@ package github.romulomotadev.msproducts.service;
 
 import github.romulomotadev.msproducts.dto.CategoryDto;
 import github.romulomotadev.msproducts.entities.Category;
-import github.romulomotadev.msproducts.exception.exceptions.exceptions.DataDuplicateException;
-import github.romulomotadev.msproducts.exception.exceptions.exceptions.ResourceNotFoundException;
+import github.romulomotadev.msproducts.exception.exceptions.DataDuplicateException;
+import github.romulomotadev.msproducts.exception.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msproducts.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

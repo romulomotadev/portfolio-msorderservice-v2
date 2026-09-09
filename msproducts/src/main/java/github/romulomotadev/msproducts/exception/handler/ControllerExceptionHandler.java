@@ -1,9 +1,9 @@
-package github.romulomotadev.msproducts.exception.exceptions.handler;
+package github.romulomotadev.msproducts.exception.handler;
 
 import github.romulomotadev.msproducts.dto.error.CustomErrorDto;
 import github.romulomotadev.msproducts.dto.error.ValidateErrorDto;
-import github.romulomotadev.msproducts.exception.exceptions.exceptions.DataDuplicateException;
-import github.romulomotadev.msproducts.exception.exceptions.exceptions.ResourceNotFoundException;
+import github.romulomotadev.msproducts.exception.exceptions.DataDuplicateException;
+import github.romulomotadev.msproducts.exception.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

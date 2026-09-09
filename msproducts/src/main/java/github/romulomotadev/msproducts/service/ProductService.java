@@ -5,7 +5,7 @@ import github.romulomotadev.msproducts.dto.ProductMinDto;
 import github.romulomotadev.msproducts.entities.Category;
 import github.romulomotadev.msproducts.entities.Product;
 import github.romulomotadev.msproducts.entities.Stock;
-import github.romulomotadev.msproducts.exception.exceptions.exceptions.ResourceNotFoundException;
+import github.romulomotadev.msproducts.exception.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msproducts.repository.CategoryRepository;
 import github.romulomotadev.msproducts.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
