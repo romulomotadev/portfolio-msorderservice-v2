@@ -29,7 +29,7 @@ public class CategoryService {
             Category category = new Category();
             category.setName(categoryDto.getName());
 
-            categoryRepository.save(category);
+            category = categoryRepository.save(category);
             return new CategoryDto(category);
         }
     }
