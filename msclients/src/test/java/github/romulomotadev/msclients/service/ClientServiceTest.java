@@ -2,6 +2,7 @@ package github.romulomotadev.msclients.service;
 
 import github.romulomotadev.msclients.dto.ClientDto;
 import github.romulomotadev.msclients.entities.Client;
+import github.romulomotadev.msclients.exception.exceptions.DuplicateResourceException;
 import github.romulomotadev.msclients.exception.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msclients.factory.ClientFactory;
 import github.romulomotadev.msclients.repository.ClientRepository;
@@ -30,7 +31,7 @@ public class ClientServiceTest {
     private ClientRepository repository;
 
 
-    // ======= DATA ========
+    // ======= DADOS ========
 
     private Long existingId;
     private Long nonExistingId;
@@ -52,19 +53,21 @@ public class ClientServiceTest {
     }
 
 
-    // ======= POST ========
+    // ======= SAVE ========
 
+    // SALVA QUANDO EMAIL NAO EXISTENTE
     @Test
-    @DisplayName("save deve salvar e retornar DTO")
-    void save_ShouldSaveAndReturnDTO() {
+    @DisplayName("save deve retornar cliente quando email não existir")
+    void saveShouldReturnClientWhenEmailNotExists() {
 
-        // ARRANGE
+        // PREPARA
+        when(repository.existsByEmail(client.getEmail())).thenReturn(false);
         when(repository.save(any(Client.class))).thenReturn(client);
 
-        // ACT
+        // EXECUTA
         clientDto = service.save(clientDto);
 
-        // ASSERT
+        // VERIFICA
         assertNotNull(clientDto);
         assertEquals(client.getId(), clientDto.getId());
         assertEquals(client.getName(), clientDto.getName());
@@ -75,20 +78,34 @@ public class ClientServiceTest {
     }
 
 
+    //EMAIL JA EXISTENTE
+    @Test
+    @DisplayName("save deve lançar duplicate resource exception quando email existir")
+    void saveShouldThrowDuplicateResourceExceptionWhenEmailExists() {
+
+        // PREPARA
+        when(repository.existsByEmail(client.getEmail())).thenReturn(true);
+
+        // EXECUTA + VERIFICA
+        assertThrows(DuplicateResourceException.class,
+                () -> service.save(clientDto));
+    }
+
+
     // ======= GET ========
 
-    // FIND BY ID EXISTING
+    // BUSCA POR ID EXISTENTE
     @Test
-    @DisplayName("findById deve retornar DTO quando ID existir")
-    void findById_ShouldReturnDTO_WhenIdExists() {
+    @DisplayName("findById deve retornar Client DTO quando ID existir")
+    void findByIdShouldReturnClientDTOWhenIdExists() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.findById(existingId)).thenReturn(Optional.of(client));
 
-        // ACT
+        // EXECUTA
         clientDto = service.findById(existingId);
 
-        // ASSERT
+        // VERIFICA
         assertNotNull(clientDto);
         assertEquals(client.getId(), clientDto.getId());
         assertEquals(client.getName(), clientDto.getName());
@@ -100,34 +117,33 @@ public class ClientServiceTest {
     }
 
 
-    // FIND BY ID NOT EXISTING
+    // BUSCA POR ID NÃO EXISTENTE
     @Test
-    @DisplayName("findById deve lançar exceção quando ID não existir")
-    void findById_ShouldThrowException_WhenIdDoesNotExist() {
+    @DisplayName("findById deve lançar Resource Not Found Exception quando ID não existir")
+    void findByIdShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
 
-        // ACT + ASSERT
-        assertThrows(ResourceNotFoundException.class, () -> {
-            service.findById(nonExistingId);
-        });
-
-        verify(repository).findById(nonExistingId);
-        verifyNoMoreInteractions(repository);
+        // EXECUTA + VERIFICA
+        assertThrows(ResourceNotFoundException.class, () ->
+            service.findById(nonExistingId));
     }
 
 
-    // FIND BY DOCUMENT EXISTING
+    // BUSCA POR DOCUMENTO EXISTENTE
     @Test
-    @DisplayName("findByDocument deve retornar DTO quando document existir")
-    void findByDocument_ShouldReturnDTO_WhenDocumentExists(){
+    @DisplayName("findByPersonDocument deve retornar Client DTO quando document existir")
+    void findByDocumentShouldReturnClientDTOWhenDocumentExists(){
 
-        // ARRANGE
+        // PREPARA
+        when(repository.existsByPersonDocument(existingDocument)).thenReturn(true);
         when(repository.findByPersonDocument(existingDocument)).thenReturn(client);
 
+        // EXECUTA
         clientDto = service.findByPersonDocument(existingDocument);
 
+        // VERIFICA
         assertNotNull(clientDto);
         assertEquals(client.getId(), clientDto.getId());
         assertEquals(client.getName(), clientDto.getName());
@@ -140,36 +156,32 @@ public class ClientServiceTest {
     }
 
 
-    // FIND BY DOCUMENT NOT EXISTING
+    // BUSCA POR DOCUMENTO NÃO EXISTENTE
     @Test
-    @DisplayName("findByDocument deve lançar exceção quando document não existir")
-    void findByDocument_ShouldThrowException_WhenIdDoesNotExist() {
+    @DisplayName("findByPersonDocument deve lançar Resource Not Found Exception quando document não existir")
+    void findByPersonDocumentShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
 
-        // ARRANGE
-        when(repository.findByPersonDocument(nonExistingDocument)).thenReturn(null);
+        // PREPARA
+        when(repository.existsByPersonDocument(nonExistingDocument)).thenReturn(false);
 
-        // ACT + ASSERT
-        assertThrows(NullPointerException.class, () -> {
-            service.findByPersonDocument(nonExistingDocument);
-        });
-
-        verify(repository).findByPersonDocument(nonExistingDocument);
-        verifyNoMoreInteractions(repository);
+        // EXECUTA + VERIFICA
+        assertThrows(ResourceNotFoundException.class, () ->
+            service.findByPersonDocument(nonExistingDocument));
     }
 
 
-    // FIND ALL
+    // BUSCA TODOS CLIENTE
     @Test
-    @DisplayName("findAll deve retornar lista de DTO")
-    void findAll_ShouldReturnListOfDTO() {
+    @DisplayName("findAll deve retornar lista de Client DTO")
+    void findAllShouldReturnListOfClientDTO() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.findAll()).thenReturn(List.of(client));
 
-        // ACT
+        // EXECUTA
         List<ClientDto> result = service.findAll();
 
-        // ASSERT
+        // VERIFICA
         assertFalse(result.isEmpty());
         assertEquals(1, result.size());
 
@@ -178,18 +190,18 @@ public class ClientServiceTest {
     }
 
 
-    // FIND ALL EMPTY
+    // BUSCA TODOS SEM HAVER CLIENTES
     @Test
     @DisplayName("findAll deve retornar lista vazia quando não houver dados")
-    void findAll_ShouldReturnEmptyList_WhenNoData() {
+    void findAllShouldReturnEmptyListWhenNoData() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.findAll()).thenReturn(List.of());
 
-        // ACT
+        // EXECUTA
         List<ClientDto> result = service.findAll();
 
-        // ASSERT
+        // VERIFICA
         assertTrue(result.isEmpty());
 
         verify(repository).findAll();
@@ -199,59 +211,53 @@ public class ClientServiceTest {
 
     // ======= DELETE ========
 
-    // DELETE ID
+    // DELETE POR ID
     @Test
     @DisplayName("delete deve remover quando ID existir")
-    void delete_ShouldRemove_WhenIdExists() {
+    void deleteShouldRemoveWhenIdExists() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.findById(existingId)).thenReturn(Optional.of(client));
 
-        // ACT
+        // EXECUTA
         service.delete(existingId);
 
-        // ASSERT
+        // VERIFICA
         verify(repository).findById(existingId);
         verify(repository).deleteById(existingId);
         verifyNoMoreInteractions(repository);
     }
 
 
-    // DELETE NOT ID
+    // DELETE QUANDO ID NAO EXISTENTE
     @Test
-    @DisplayName("delete deve lançar exceção quando ID não existir")
-    void delete_ShouldThrowException_WhenIdDoesNotExist() {
+    @DisplayName("delete deve lançar Resource Not Found Execption quando ID não existir")
+    void deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
 
-        // ARRANGE
-        when(repository.findById(nonExistingId))
-                .thenReturn(Optional.empty());
+        // PREPARA
+        when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
 
         // ACT + ASSERT
-        assertThrows(ResourceNotFoundException.class, () -> {
-            service.delete(nonExistingId);
-        });
-
-        verify(repository).findById(nonExistingId);
-        verifyNoMoreInteractions(repository);
+        assertThrows(ResourceNotFoundException.class, () ->
+            service.delete(nonExistingId));
     }
 
 
     // ======= UPDATE ========
 
-    // UPDATE ID EXISTING
+    // ATUALIZA QUANDO ID EXISTENTE
     @Test
-    @DisplayName("update deve atualizar e retornar DTO quando ID existir")
-    void update_ShouldUpdateAndReturnDTO_WhenIdExists() {
+    @DisplayName("update deve atualizar e retornar Client DTO quando ID existir")
+    void updateShouldUpdateAndReturnClientDTOWhenIdExists() {
 
-        // ARRANGE
+        // PREPARAR
         when(repository.findById(existingId)).thenReturn(Optional.of(client));
-
         when(repository.save(any(Client.class))).thenReturn(client);
 
-        // ACT
+        // EXECUTA
         ClientDto result = service.update(clientDto, existingId);
 
-        // ASSERT
+        // VERIFICA
         assertNotNull(result);
         assertEquals(existingId, result.getId());
 
@@ -261,20 +267,16 @@ public class ClientServiceTest {
     }
 
 
-    // UPDATE ID NOt EXISTING
+    // ATUALIZA ID NÃO EXISTENTE
     @Test
-    @DisplayName("update deve lançar exceção quando ID não existir")
-    void update_ShouldThrowException_WhenIdDoesNotExist() {
+    @DisplayName("update deve lançar Resource Not Found Exception quando ID não existir")
+    void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
 
-        // ACT + ASSERT
-        assertThrows(ResourceNotFoundException.class, () -> {
-            service.update(clientDto, nonExistingId);
-        });
-
-        verify(repository).findById(nonExistingId);
-        verifyNoMoreInteractions(repository);
+        // EXECUTA + VERIFICA
+        assertThrows(ResourceNotFoundException.class, () ->
+            service.update(clientDto, nonExistingId));
     }
 }

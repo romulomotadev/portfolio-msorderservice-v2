@@ -5,6 +5,7 @@ import github.romulomotadev.msclients.dto.ClientDto;
 import github.romulomotadev.msclients.entities.Address;
 import github.romulomotadev.msclients.entities.Client;
 import github.romulomotadev.msclients.entities.Person;
+import github.romulomotadev.msclients.exception.exceptions.DuplicateResourceException;
 import github.romulomotadev.msclients.exception.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msclients.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,11 @@ public class ClientService {
 
     @Transactional
     public ClientDto save(ClientDto clientDto) {
+
+        if(clientRepository.existsByEmail(clientDto.getEmail())){
+            throw new DuplicateResourceException("Client already exists");
+        }
+
         Client client = new Client();
         copyClientDtoToClient(clientDto, client);
 
@@ -56,7 +62,13 @@ public class ClientService {
     //BUSCA POR DOCUMENTO
     @Transactional(readOnly = true)
     public ClientDto findByPersonDocument(String document) {
+
+        if(!clientRepository.existsByPersonDocument(document)){
+            throw new ResourceNotFoundException("Document not found");
+        }
+
         Client client = clientRepository.findByPersonDocument(document);
+
         return new ClientDto(client);
     }
 
@@ -72,6 +84,7 @@ public class ClientService {
 
     @Transactional
     public void delete(Long id) {
+
         clientRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Id not found")
         );
@@ -95,6 +108,7 @@ public class ClientService {
 
         client.setPerson(person);
         client = clientRepository.save(client);
+
         return new ClientDto(client);
     }
 

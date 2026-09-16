@@ -37,4 +37,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                     "WHERE TB_PRODUCT.ACTIVE = :status")
     Page<Product> findAllProductsStatus(Boolean status, Pageable pageable);
 
+    // BUSCA PRODUTO PELO CODIGO SKU
+    boolean existsBySku(String sku);
 }

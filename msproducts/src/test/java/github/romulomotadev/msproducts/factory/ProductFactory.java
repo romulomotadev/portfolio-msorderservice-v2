@@ -5,6 +5,7 @@ import github.romulomotadev.msproducts.entities.Product;
 import java.time.Instant;
 
 import static github.romulomotadev.msproducts.factory.CategoryFactory.createdCategory;
+import static github.romulomotadev.msproducts.factory.StockFactory.createdStock;
 
 public class ProductFactory {
 
@@ -20,6 +21,7 @@ public class ProductFactory {
         product.setPrice(100.0);
 
         product.setCategory(createdCategory());
+        product.setStock(createdStock());
 
         return product;
     }

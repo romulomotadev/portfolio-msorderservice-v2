@@ -25,13 +25,13 @@ public class CategoryService {
 
         if (categoryRepository.existsByName(categoryDto.getName())) {
             throw new DataDuplicateException("Category already exists");
-        } else {
-            Category category = new Category();
-            category.setName(categoryDto.getName());
-
-            category = categoryRepository.save(category);
-            return new CategoryDto(category);
         }
+
+        Category category = new Category();
+        category.setName(categoryDto.getName());
+
+        category = categoryRepository.save(category);
+        return new CategoryDto(category);
     }
 
 
@@ -60,19 +60,21 @@ public class CategoryService {
     }
 
 
-    //============ PUT ===============//
+    //============ UPDATE ===============//
 
     @Transactional
     public CategoryDto update(Long id, CategoryDto categoryDto){
         if (categoryRepository.existsByName(categoryDto.getName())) {
             throw new DataDuplicateException("Category already exists");
-        } else {
-            Category category = categoryRepository.findById(id).orElseThrow(
-                    () -> new ResourceNotFoundException("Category not found"));
-            category.setName(categoryDto.getName());
-            categoryRepository.save(category);
-            return new CategoryDto(category);
         }
+
+        Category category = categoryRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Category not found"));
+
+        category.setName(categoryDto.getName());
+        categoryRepository.save(category);
+        return new CategoryDto(category);
+
     }
 
 
@@ -82,8 +84,7 @@ public class CategoryService {
     public void delete(Long id){
         if(!categoryRepository.existsById(id)){
             throw new ResourceNotFoundException("Category not found");
-        }else{
-            categoryRepository.deleteById(id);
         }
+        categoryRepository.deleteById(id);
     }
 }

@@ -38,7 +38,7 @@ public class ProductService {
         stock.setProduct(product);
         product.setStock(stock);
 
-        productRepository.save(product);
+        product = productRepository.save(product);
 
         return new ProductDto(product);
     }
@@ -51,6 +51,8 @@ public class ProductService {
         Product product = productRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("not found product information with id: " + id));
         copyDtoToEntity(dto, product);
+
+        product = productRepository.save(product);
 
         return new ProductDto(product);
     }
@@ -69,8 +71,10 @@ public class ProductService {
     // BUSCA PRODUTO PELO CODIGO SKU
     @Transactional(readOnly = true)
     public ProductDto findBySku(String sku) {
-        if (sku == null || sku.isEmpty())
+        if (!productRepository.existsBySku(sku)) {
             throw new ResourceNotFoundException("not found product information with sku: " + sku);
+        }
+
         Product product = productRepository.findBySku(sku);
         return new ProductDto(product);
     }
@@ -116,15 +120,16 @@ public class ProductService {
     //============ AUX ===============//
 
     private void copyDtoToEntity(ProductMinDto dto, Product product) {
+
+        Category category = categoryRepository.findById(dto.getCategoryId()).orElseThrow(
+                () -> new ResourceNotFoundException("not found category information"));
+
         product.setName(dto.getName());
         product.setDescription(dto.getDescription());
         product.setSku(dto.getSku());
         product.setPrice(dto.getPrice());
         product.setActive(dto.getActive());
 
-        Category category = categoryRepository.findById(dto.getCategoryId()).orElseThrow(
-                () -> new ResourceNotFoundException("not found category information with product: "
-                        + dto.getCategoryId()));
         product.setCategory(category);
     }
 

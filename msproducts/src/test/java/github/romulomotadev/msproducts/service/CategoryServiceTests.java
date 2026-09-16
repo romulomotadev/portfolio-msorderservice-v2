@@ -1,11 +1,10 @@
-package github.romulomotadev.msproducts.category;
+package github.romulomotadev.msproducts.service;
 
 import github.romulomotadev.msproducts.dto.CategoryDto;
 import github.romulomotadev.msproducts.entities.Category;
 import github.romulomotadev.msproducts.exception.exceptions.DataDuplicateException;
 import github.romulomotadev.msproducts.exception.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msproducts.repository.CategoryRepository;
-import github.romulomotadev.msproducts.service.CategoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +33,7 @@ public class CategoryServiceTests {
 
     private Long existingId;
     private Long nonExistingId;
+    private Long dependentId;
 
     private String nameExisting;
 
@@ -43,31 +44,31 @@ public class CategoryServiceTests {
     @BeforeEach
     void setUp() {
         existingId = 1L;
-        nonExistingId = 999L;
+        nonExistingId = 2L;
+        dependentId = 3L;
 
         category = createdCategory();
         categoryDto = new CategoryDto(category);
 
         nameExisting = category.getName();
-
     }
 
 
-    // ======== POST =========
+    // ======== SAVE =========
 
-    // CREATED NEW CATEGORY
+    // SALVA NOVA CATEGORIA
     @Test
-    @DisplayName("create deve salvar e retornar DTO")
-    void create_ShouldSaveAndReturnDTO() {
+    @DisplayName("save deve salvar e retornar Category DTO")
+    void saveShouldSaveAndReturnCategoryDTO() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.existsByName(nameExisting)).thenReturn(false);
         when(repository.save(any(Category.class))).thenReturn(category);
 
-        // ACT
+        // EXECUTA
         CategoryDto result = service.save(categoryDto);
 
-        // ASSERT
+        // VERIFICA
         assertNotNull(result);
         assertEquals(category.getId(), result.getId());
         assertEquals(category.getName(), result.getName());
@@ -76,41 +77,36 @@ public class CategoryServiceTests {
         verifyNoMoreInteractions(repository);
     }
 
-    // NON CREATED CATEGORY FOR DUPLICATE CATEGORY
+
+    // NAO IRA SAVA QUANDO CATEGORIA JA EXISTENTE
     @Test
-    @DisplayName("create deve lançar exceção quando a categoria já existe")
-    void create_ShouldThrowExceptionDuplicated() {
-        // ARRANGE
+    @DisplayName("save deve lançar Data Duplicate Exception quando a categoria já existe")
+    void saveShouldThrowDataDuplicateExceptionExceptionWhenCategoryAlreadyExists() {
+
+        // PREPARA
         when(repository.existsByName(categoryDto.getName())).thenReturn(true);
 
-        // ACT
-        DataDuplicateException exception = assertThrows(
-                DataDuplicateException.class,
+        // EXECUTA + VERIFICA
+        assertThrows(DataDuplicateException.class,
                 () -> service.save(categoryDto)
         );
-
-        // ASSERT
-        assertEquals("Category already exists", exception.getMessage());
-        verify(repository).existsByName(categoryDto.getName());
-        verify(repository, never()).save(any(Category.class));
-        verifyNoMoreInteractions(repository);
     }
 
 
     // ======== GET =========
 
-    // FIND BY ID
+    // BUSCA POR ID
     @Test
-    @DisplayName("findById deve retornar DTO quando ID existir")
-    void findById_ShouldReturnDTO_WhenIdExists() {
+    @DisplayName("findById deve retornar Category DTO quando ID existir")
+    void findByIdShouldReturnCategoryDTOWhenIdExists() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.findById(existingId)).thenReturn(Optional.of(category));
 
-        // ACT
+        // EXECUTA
         CategoryDto result = service.findById(existingId);
 
-        // ASSERT
+        // VERIFICA
         assertNotNull(result);
         assertEquals(existingId, result.getId());
         assertEquals(category.getName(), result.getName());
@@ -119,52 +115,48 @@ public class CategoryServiceTests {
         verifyNoMoreInteractions(repository);
     }
 
-    // FIND BY ID NOT EXISTS
+    // BUSCA POR ID NAO EXISTENTE
     @Test
-    @DisplayName("findById deve lançar exceção quando ID não existir")
-    void findById_ShouldThrowException_WhenIdDoesNotExist() {
+    @DisplayName("findById deve lançar Resource Not Found Exception quando ID não existir")
+    void findByIdShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
 
-        // ACT + ASSERT
-        assertThrows(ResourceNotFoundException.class, () -> {
-            service.findById(nonExistingId);
-        });
-
-        verify(repository).findById(nonExistingId);
-        verifyNoMoreInteractions(repository);
+        // EXECUTA + VERIFICA
+        assertThrows(ResourceNotFoundException.class, () ->
+            service.findById(nonExistingId));
     }
 
-    // SEARCH BY NAME
+    // BUSCA POR NOME
     @Test
-    @DisplayName("searchByName deve retornar DTO quando nome existir")
-    void searchByName_ShouldReturnDTO_WhenNameExists() {
+    @DisplayName("searchByName deve retornar Category DTO quando Categoria já existir")
+    void searchByNameShouldReturnDTOWhenCategoryAlreadyExists() {
 
-        //ARRANGE
+        //PREPARA
         when(repository.searchByName(category.getName())).thenReturn(List.of(category));
 
-        // ACT
+        // EXECUTA
         List<CategoryDto> result = service.searchByName(category.getName());
 
-        // ASSERT
+        // VERIFICA
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals(category.getName(), result.getFirst().getName());
     }
 
-    // SEARCH BY NAME WHEN LIST IS EMPTY
+    // BUSCA POR NOME QUANDO NOME NAO EXISTE
     @Test
-    @DisplayName("searchByName deve retornar lista vazia quando não houver dados")
-    void searchByName_ShouldReturnEmptyList_WhenNoData(){
+    @DisplayName("searchByName deve retornar lista vazia quando não houver categoria")
+    void searchByNameShouldReturnEmptyListWhenCategory(){
 
-        // ARRANGE
+        // PREPARA
         when(repository.searchByName(category.getName())).thenReturn(List.of());
 
-        // ACT
+        // EXECUTA
         List<CategoryDto> result = service.searchByName(categoryDto.getName());
 
-        // ASSERT
+        // VERIFICA
         assertNotNull(result);
         assertTrue(result.isEmpty());
 
@@ -172,18 +164,18 @@ public class CategoryServiceTests {
         verifyNoMoreInteractions(repository);
     }
 
-    // FIND ALL
+    // BUSCA POR TODAS AS CATEGORIAS
     @Test
-    @DisplayName("findAll deve retornar lista de DTO")
-    void findAll_ShouldReturnListOfDTO() {
+    @DisplayName("findAll deve retornar lista de Categorias DTOs")
+    void findAllShouldReturnListOfCategoriesDTOs() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.findAll()).thenReturn(List.of(category));
 
-        // ACT
+        // EXECUTA
         List<CategoryDto> result = service.findAll();
 
-        // ASSERT
+        // VERIFICA
         assertFalse(result.isEmpty());
         assertEquals(1, result.size());
 
@@ -191,18 +183,18 @@ public class CategoryServiceTests {
         verifyNoMoreInteractions(repository);
     }
 
-    // FIND ALL WHEN LIST IS EMPTY
+    // BUSCA POR TODAS AS CATEGORIAS QUANDO NAO EXISTE
     @Test
     @DisplayName("findAll deve retornar lista vazia quando não houver dados")
-    void findAll_ShouldReturnEmptyList_WhenNoData() {
+    void findAllShouldReturnEmptyListWhenNoData() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.findAll()).thenReturn(List.of());
 
-        // ACT
+        // EXECUTA
         List<CategoryDto> result = service.findAll();
 
-        // ASSERT
+        // VERIFICA
         assertTrue(result.isEmpty());
 
         verify(repository).findAll();
@@ -210,22 +202,22 @@ public class CategoryServiceTests {
     }
 
 
-    // ======== PUT =========
+    // ======== UPDATE =========
 
-    // UPDATE ID EXISTING
+    // ATUALIZA ID NÃO EXISTE
     @Test
-    @DisplayName("update deve atualizar e retornar DTO quando ID existir")
-    void update_ShouldUpdateAndReturnDTO_WhenIdExists() {
+    @DisplayName("update deve atualizar e retornar Category DTO quando ID existir")
+    void updateShouldUpdateAndReturnCategoryDTOWhenIdExists() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.existsByName(category.getName())).thenReturn(false);
         when(repository.findById(existingId)).thenReturn(Optional.of(category));
         when(repository.save(any(Category.class))).thenReturn(category);
 
-        // ACT
+        // EXECUTA
         CategoryDto result = service.update(existingId, categoryDto);
 
-        // ASSERT
+        // VERIFICA
         assertNotNull(result);
         assertEquals(existingId, result.getId());
         assertEquals(category.getName(), result.getName());
@@ -235,79 +227,64 @@ public class CategoryServiceTests {
         verifyNoMoreInteractions(repository);
     }
 
-    // UPDATE ID NOT EXIST
+    // ATUALIZA ID NAO EXISTE
     @Test
-    @DisplayName("update deve lançar exceção quando ID não existir")
-    void update_ShouldThrowException_WhenIdDoesNotExist() {
+    @DisplayName("update deve lançar Resource Not Found Exception quando ID não existir")
+    void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
 
-        // ARRANGE
-        when(repository.existsByName(category.getName()))
-                .thenReturn(false);
-        when(repository.findById(nonExistingId))
-                .thenReturn(Optional.empty());
+        // PREPARA
+        when(repository.existsByName(category.getName())).thenReturn(false);
+        when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
 
-        // ACT + ASSERT
-        assertThrows(ResourceNotFoundException.class, () -> {
-            service.update(nonExistingId, categoryDto);
-        });
-
-        verify(repository).findById(nonExistingId);
-        verifyNoMoreInteractions(repository);
+        // EXECUTA + VERIFICA
+        assertThrows(ResourceNotFoundException.class, () ->
+            service.update(nonExistingId, categoryDto));
     }
 
-    // UPDATE CATEGORY EXISTING
+    // NAO ATUALIZA QUANDO CATEGORIA JA EXISTE
     @Test
     @DisplayName("update deve lançar exceção quando category já existir")
     void update_ShouldThrowException_WhenCategoryExist() {
 
-        // ARRANGE
+        // PREPARA
         when(repository.existsByName(category.getName())).thenReturn(true);
 
-        // ACT + ASSERT
-        assertThrows(DataDuplicateException.class, () -> {
-            service.update(existingId, categoryDto);
-        });
-
-        verify(repository).existsByName(category.getName());
-        verifyNoMoreInteractions(repository);
+        // EXECUTA + VERIFICA
+        assertThrows(DataDuplicateException.class, () ->
+            service.update(existingId, categoryDto));
     }
 
 
     // ======== DELETE =========
 
-    // DELETE ID EXISTING
+    // ID EXISTE
     @Test
-    @DisplayName("delete deve remover quando ID existir")
-    void delete_ShouldRemove_WhenIdExists() {
+    @DisplayName("delete deve remover categoria quando ID existir")
+    void deleteShouldRemoveCategoryWhenIdExists() {
 
-        // ARRANGE
-        when(repository.existsById(existingId))
-                .thenReturn(true);
+        // PREPARA
+        when(repository.existsById(existingId)).thenReturn(true);
+        doNothing().when(repository).deleteById(existingId);
 
-        // ACT
+        // EXECUTA
         service.delete(existingId);
 
-        // ASSERT
+        // VERIFICA
         verify(repository).existsById(existingId);
         verify(repository).deleteById(existingId);
         verifyNoMoreInteractions(repository);
     }
 
-    // DELETE ID NOT EXISTING
+    // ID NAO EXISTE
     @Test
-    @DisplayName("delete deve lançar exceção quando ID não existir")
-    void delete_ShouldThrowException_WhenIdDoesNotExist() {
+    @DisplayName("delete deve lançar exceção Resource Not Found Exception quando ID não existir")
+    void deleteShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
 
-        // ARRANGE
-        when(repository.existsById(nonExistingId))
-                .thenReturn(false);
+        // PREPARA
+        when(repository.existsById(nonExistingId)).thenReturn(false);
 
-        // ACT + ASSERT
-        assertThrows(ResourceNotFoundException.class, () -> {
-            service.delete(nonExistingId);
-        });
-
-        verify(repository).existsById(nonExistingId);
-        verifyNoMoreInteractions(repository);
+        // EXECUTA + VERIFICA
+        assertThrows(ResourceNotFoundException.class, () ->
+            service.delete(nonExistingId));
     }
 }

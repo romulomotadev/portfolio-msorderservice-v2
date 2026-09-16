@@ -31,19 +31,6 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(err);
     }
 
-    // DOCUMENTO NÃO ENCONTRADO
-    @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<CustomErrorDto> NullPointer(NullPointerException e, HttpServletRequest request) {
-        HttpStatus status = HttpStatus.NOT_FOUND;
-        CustomErrorDto err = new CustomErrorDto(
-                Instant.now(),
-                status.value(),
-                "Document not found",
-                request.getRequestURI()
-        );
-        return ResponseEntity.status(status).body(err);
-    }
-
     // TRATANDO DADOS INVÁLIDOS
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<CustomErrorDto> argumentNotValid(MethodArgumentNotValidException e, HttpServletRequest request) {
