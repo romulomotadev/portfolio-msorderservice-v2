@@ -26,18 +26,21 @@ public class StockService {
     @Transactional
     public StockDto update(StockDto stockDto, Long id) {
 
-        Product product = productRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("not found product with id: " + id));
+        if(!productRepository.existsById(id))
+            throw new ResourceNotFoundException("not found product with id: " + id);
 
-        Stock entityStock = stockRepository.getReferenceById(product.getStock().getId());
+        Product product = productRepository.getReferenceById(id);
+
+        Stock entityStock = stockRepository.getReferenceById(
+                productRepository.getReferenceById(id).getStock().getId());
 
         entityStock.setQuantity(stockDto.getQuantity());
         entityStock.setMinQuantity(stockDto.getMinQuantity());
         product.setStock(entityStock);
 
-        productRepository.save(product);
+        Product saveproduct = productRepository.save(product);
 
-        return new StockDto(entityStock);
+        return new StockDto(saveproduct.getStock());
     }
 
 

@@ -183,7 +183,7 @@ public class CategoryServiceTests {
         verifyNoMoreInteractions(repository);
     }
 
-    // BUSCA POR TODAS AS CATEGORIAS QUANDO NAO EXISTE
+    // BUSCA POR TODAS LISTA VAZIA
     @Test
     @DisplayName("findAll deve retornar lista vazia quando não houver dados")
     void findAllShouldReturnEmptyListWhenNoData() {
