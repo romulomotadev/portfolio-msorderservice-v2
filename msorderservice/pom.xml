@@ -94,6 +94,41 @@
 
 	<build>
 		<plugins>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.15</version>
+				<configuration>
+					<excludes>
+						<exclude>github/romulomotadev/msorderservice/MsorderserviceApplication.class</exclude>
+						<exclude>github/romulomotadev/msorderservice/entities/**</exclude>
+						<exclude>github/romulomotadev/msorderservice/dto/**</exclude>
+						<exclude>github/romulomotadev/msorderservice/controller/handlers/**</exclude>
+						<exclude>github/romulomotadev/msorderservice/exception/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<!-- nome do diretorio onde os relatorios será gerado -->
+						<id>jacoco-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<!-- caminho onde será gerado o relatorio -->
+							<outputDirectory>target/jacoco-report</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
