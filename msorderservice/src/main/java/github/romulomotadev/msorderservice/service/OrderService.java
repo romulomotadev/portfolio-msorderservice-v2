@@ -54,6 +54,9 @@ public class OrderService {
                 .build();
     }
 
+
+    //============ GET ORDER SERVICE ===============//
+
     // FIND BY ID
     public OrderDto findById(Long id) {
         Order order = orderRepository.findById(id).orElseThrow(

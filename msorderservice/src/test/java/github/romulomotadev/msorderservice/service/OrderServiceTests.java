@@ -1,10 +1,9 @@
 package github.romulomotadev.msorderservice.service;
 
 import feign.FeignException;
-import github.romulomotadev.msorderservice.dto.ClientDataResponseDTO;
-import github.romulomotadev.msorderservice.dto.ClientResponseDto;
-import github.romulomotadev.msorderservice.dto.ProductDataResponseDTO;
-import github.romulomotadev.msorderservice.dto.ProductResponseDto;
+import github.romulomotadev.msorderservice.dto.*;
+import github.romulomotadev.msorderservice.entities.Order;
+import github.romulomotadev.msorderservice.exception.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msorderservice.repository.OrderRepository;
 import github.romulomotadev.msorderservice.response.ClientResponse;
 import github.romulomotadev.msorderservice.response.ProductResponse;
@@ -15,14 +14,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 import static github.romulomotadev.msorderservice.factory.ClientDataResponseDtoFactory.createClientResponseDto;
+import static github.romulomotadev.msorderservice.factory.OrderFactory.createOrder;
 import static github.romulomotadev.msorderservice.factory.ProductDataResponseDtoFactory.createProductResponseDto;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -47,12 +49,18 @@ public class OrderServiceTests {
     private String documentNotExisting;
     private String productNameExisting;
     private String productNameNotExisting;
+    private Long orderIdExisting;
+    private Long orderIdNotExisting;
 
     private PageImpl<ProductResponseDto> page;
     private PageImpl<ProductResponseDto> pageEmpty;
+    private PageImpl<Order> pageOrder;
+    private PageImpl<OrderDto> pageOrderDto;
 
     private ClientResponseDto clientResponseDto;
     private ProductResponseDto productResponseDto;
+    private Order order;
+    private OrderDto orderDto;
 
 
     @BeforeEach
@@ -62,11 +70,18 @@ public class OrderServiceTests {
         documentNotExisting = "222.222.222-22";
         productNameExisting = "Produto 1";
         productNameNotExisting = "Produto 2";
+        orderIdExisting = 1L;
+        orderIdNotExisting = 2L;
 
         clientResponseDto = createClientResponseDto();
         productResponseDto = createProductResponseDto();
+        order = createOrder();
+        orderDto = new OrderDto(order);
 
         page = new PageImpl<>(List.of(productResponseDto));
+        pageOrder = new PageImpl<>(List.of(order));
+        pageOrderDto = new PageImpl<>(List.of(orderDto));
+
         pageEmpty = new PageImpl<>(List.of());
     }
 
@@ -144,4 +159,78 @@ public class OrderServiceTests {
         assertEquals(0, response.getProductResponseDto().getContent().size());
         assertTrue(response.getProductResponseDto().isEmpty());
     }
+
+
+    //============ GET ORDER SERVICE ===============//
+
+    //BUSCA ORDEM ID EXISTENTE
+    @Test
+    @DisplayName("findById deve retornar Order Dto quando Id existir")
+    void findByIdShouldReturnOrderDtoWhenIdExists() {
+
+        //PREPARAR
+        when(orderRepository.findById(orderIdExisting)).thenReturn(Optional.of(order));
+
+        //EXECUTAR
+        OrderDto result = orderService.findById(orderIdExisting);
+
+        //VALIDAR
+        assertNotNull(result);
+        assertEquals(orderDto.getId(), result.getId());
+        assertEquals(orderDto.getClientName(), result.getClientName());
+        assertEquals(orderDto.getOrderItem().getFirst().getId(), result.getOrderItem().getFirst().getId());
+    }
+
+    //BUSCAR ORDEM ID NÃO EXISTENTE
+    @Test
+    @DisplayName("findById deve lançar Resource Not Found Exception quando Order Id not exists")
+    void findByIdThrowResourceNotFoundExceptionWhenOrderIdNotExistis(){
+
+        //PREPARAR
+        when(orderRepository.findById(orderIdNotExisting)).thenReturn(Optional.empty());
+
+        //EXECUTAR
+        assertThrows(ResourceNotFoundException.class,
+                () -> orderService.findById(orderIdNotExisting));
+    }
+
+    //BUSCA TODAS AS ORDEM
+    @Test
+    @DisplayName("findAll deve retornar uma page de Order Dto quando existir ordens")
+    void findAllShouldReturnPageOfOrderDtoWhenExistisOrders() {
+
+        //PREPARAR
+        when(orderRepository.findAll(any(Pageable.class))).thenReturn(pageOrder);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        //EXECUTAR
+        Page<OrderDto> result = orderService.findAll(pageable);
+
+        //VERIFICA
+        assertNotNull(result);
+        assertEquals(pageOrderDto.getTotalElements(), result.getTotalElements());
+        assertEquals(pageOrderDto.getContent().getFirst().getId(), result.getContent().getFirst().getId());
+        assertEquals(pageOrderDto.getContent().getFirst().getClientName(), result.getContent().getFirst().getClientName());
+    }
+
+    //BUSCAR TODAS ORDENS QUANDO VAZIA
+    @Test
+    @DisplayName("findAll deve retornar page vazia quando não houver order")
+    void findAllShouldReturnPageEmptyWhenNotOrder(){
+
+        //PREPARAR
+        when(orderRepository.findAll(any(Pageable.class))).thenReturn(Page.empty());
+        Pageable pageable = PageRequest.of(0, 10);
+
+        //EXECUTAR
+        Page<OrderDto> result = orderService.findAll(pageable);
+
+        //VALIDAR
+        assertNotNull(result);
+        assertEquals(0, result.getTotalElements());
+        assertEquals(1, result.getTotalPages());
+        assertEquals(0, result.getContent().size());
+        assertTrue(result.isEmpty());
+    }
+
 }
