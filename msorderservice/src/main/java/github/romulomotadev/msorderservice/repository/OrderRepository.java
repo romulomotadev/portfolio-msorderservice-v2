@@ -1,5 +1,6 @@
 package github.romulomotadev.msorderservice.repository;
 
+import github.romulomotadev.msorderservice.dto.OrderDto;
 import github.romulomotadev.msorderservice.entities.Order;
 
 import org.springframework.data.domain.Page;
@@ -25,9 +26,9 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(nativeQuery = true,
             value = "SELECT * " +
                     "FROM TB_ORDERS " +
-                    "WHERE UPPER(TB_ORDERS.CLIENT_NAME) LIKE UPPER('Bial Constantine')",
+                    "WHERE UPPER(TB_ORDERS.CLIENT_NAME) LIKE UPPER('%' || :nameClient || '%')",
             countQuery = "SELECT COUNT(*) " +
                     "FROM TB_ORDERS " +
-                    "WHERE UPPER(TB_ORDERS.CLIENT_NAME) LIKE UPPER('Bial Constantine')")
+                    "WHERE UPPER(TB_ORDERS.CLIENT_NAME) LIKE UPPER('%' || :nameClient || '%')")
     Page<Order> findByClient(String nameClient, Pageable pageable);
 }

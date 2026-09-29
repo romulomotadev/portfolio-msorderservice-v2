@@ -51,6 +51,8 @@ public class OrderServiceTests {
     private String productNameNotExisting;
     private Long orderIdExisting;
     private Long orderIdNotExisting;
+    private String status;
+    private String nameClient;
 
     private PageImpl<ProductResponseDto> page;
     private PageImpl<ProductResponseDto> pageEmpty;
@@ -72,16 +74,18 @@ public class OrderServiceTests {
         productNameNotExisting = "Produto 2";
         orderIdExisting = 1L;
         orderIdNotExisting = 2L;
+        status = "CREATED";
+        nameClient = "Client 1";
 
         clientResponseDto = createClientResponseDto();
+
         productResponseDto = createProductResponseDto();
+        page = new PageImpl<>(List.of(productResponseDto));
+
         order = createOrder();
         orderDto = new OrderDto(order);
-
-        page = new PageImpl<>(List.of(productResponseDto));
         pageOrder = new PageImpl<>(List.of(order));
         pageOrderDto = new PageImpl<>(List.of(orderDto));
-
         pageEmpty = new PageImpl<>(List.of());
     }
 
@@ -231,6 +235,44 @@ public class OrderServiceTests {
         assertEquals(1, result.getTotalPages());
         assertEquals(0, result.getContent().size());
         assertTrue(result.isEmpty());
+    }
+
+    //BUSCAR ORDENS POR STATUS
+    @Test
+    @DisplayName("findByStatus deve retornar page orders dto por status")
+    void findByStatusShouldReturnPageOrderDtoByStatus(){
+
+        //PREPARAR
+        when(orderRepository.findByStatus(eq(status), any(Pageable.class))).thenReturn(pageOrder);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        //EXECUTAR
+        Page<OrderDto> pageResult = orderService.findByStatus(status, pageable);
+
+        //VALIDA
+        assertNotNull(pageResult);
+        assertEquals(pageResult.getContent().stream().iterator().next().getId(), orderDto.getId());
+        assertEquals(pageResult.getContent().stream().iterator().next().getClientName(), orderDto.getClientName());
+        assertEquals(pageResult.getContent().stream().iterator().next().getRequestStatus(), orderDto.getRequestStatus());
+    }
+
+    //BUSCAR ORDENS POR CLIENTE
+    @Test
+    @DisplayName("findByClient deve retornar page orders dto por nome do cliente")
+    void findByClientShouldRetornPageOrderDtosByNameClient(){
+
+        //PREPARAR
+        when(orderRepository.findByClient(eq(nameClient), any(Pageable.class))).thenReturn(pageOrder);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        //EXECUTAR
+        Page<OrderDto> pageResult = orderService.findByClient(nameClient, pageable);
+
+        //VALIDAR
+        assertNotNull(pageResult);
+        assertEquals(pageResult.getContent().stream().iterator().next().getId(), orderDto.getId());
+        assertEquals(pageResult.getContent().stream().iterator().next().getClientName(), orderDto.getClientName());
+        assertEquals(pageResult.getContent().stream().iterator().next().getRequestStatus(), orderDto.getRequestStatus());
     }
 
 }
