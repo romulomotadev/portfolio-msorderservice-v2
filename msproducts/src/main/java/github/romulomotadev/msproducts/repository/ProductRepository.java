@@ -27,6 +27,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                     "WHERE UPPER(TB_PRODUCT.NAME) LIKE UPPER('%' || :name || '%')")
     Page<Product> searchProductByName(@Param("name") String name, Pageable pageable);
 
+    // BUSCA PRODUTO POR NOME
+    Product findByName(String name);
+
     // BUSCA TODOS PRODUTOS ATIVOS OU INATIVOS
     @Query(nativeQuery = true,
             value = "SELECT * " +
@@ -37,6 +40,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                     "WHERE TB_PRODUCT.ACTIVE = :status")
     Page<Product> findAllProductsStatus(Boolean status, Pageable pageable);
 
-    // BUSCA PRODUTO PELO CODIGO SKU
+    // VERIFICA PRODUTO PELO CODIGO SKU
     boolean existsBySku(String sku);
+
+    // VERIFICA PRODUTO POR NOME
+    boolean existsByName(String name);
 }

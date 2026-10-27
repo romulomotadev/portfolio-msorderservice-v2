@@ -99,6 +99,16 @@ public class ProductService {
         return products.map(ProductDto::new);
     }
 
+    // BUSCAR PRODUTO POR NOME
+    @Transactional(readOnly = true)
+    public ProductDto findByName(String name) {
+        if (!productRepository.existsByName(name)) {
+            throw new ResourceNotFoundException("not found product information with name: " + name);
+        }
+        Product product = productRepository.findByName(name);
+        return new ProductDto(product);
+    }
+
     // BUSCA TODOS PRODUTOS ATIVOS OU INATIVOS
     @Transactional(readOnly = true)
     public Page<ProductDto> findAllProductsStatus(Boolean active, Pageable pageable) {

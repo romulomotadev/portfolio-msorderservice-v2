@@ -2,6 +2,12 @@ spring:
   application:
     name: msclients
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/PORTFOLIO_REALM
+
 server:
   port: 0
 

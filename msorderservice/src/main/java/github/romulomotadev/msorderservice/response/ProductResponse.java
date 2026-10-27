@@ -13,7 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface ProductResponse {
 
+    // BUSCA PRODUTOS POR NOME
     @GetMapping("/search")
     ResponseEntity<Page<ProductResponseDto>> searchProductByName(
             @RequestParam("name") String name, @SpringQueryMap Pageable pageable);
+
+    // BUSCA PRODUTO POR NOME
+    @GetMapping("/name")
+    ResponseEntity<ProductResponseDto> findByNameIgnoreCase(
+            @RequestParam("name") String name);
 }

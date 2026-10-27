@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,9 +28,8 @@ import static github.romulomotadev.msorderservice.factory.ClientDataResponseDtoF
 import static github.romulomotadev.msorderservice.factory.OrderFactory.createOrder;
 import static github.romulomotadev.msorderservice.factory.ProductDataResponseDtoFactory.createProductResponseDto;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -274,5 +274,27 @@ public class OrderServiceTests {
         assertEquals(pageResult.getContent().stream().iterator().next().getClientName(), orderDto.getClientName());
         assertEquals(pageResult.getContent().stream().iterator().next().getRequestStatus(), orderDto.getRequestStatus());
     }
+
+
+    //============ POST ===============//
+
+
+    @Test
+    @DisplayName("createOrder lança deve lançar Resource Not Found Exception quando documento cliente não existir")
+    void createOrderShouldThrowResourceNotFoundExceptionWhenDocumentClientDoesNotExist() {
+
+        when(clientResponse.findByPersonDocument(anyString()))
+                .thenReturn(ResponseEntity.<ClientResponseDto>ok(null));
+
+        assertThrows(ResourceNotFoundException.class, () ->
+                orderService.createOrder(orderDto)
+        );
+
+        verify(clientResponse).findByPersonDocument(anyString());
+        verifyNoInteractions(productResponse, orderRepository);
+    }
+
+
+
 
 }

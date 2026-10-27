@@ -32,7 +32,10 @@ public class OrderService {
 
     //============ GET ===============//
 
+    // PARA TEST RESPONSE
+
     // RESPONSE CLIENT
+    //busca cliente no microsserviço de clientes pelo documento
     public ClientDataResponseDTO getClientResponse(String document) {
 
         ResponseEntity<ClientResponseDto> clientResponseDto = clientResponse.findByPersonDocument(document);
@@ -44,6 +47,7 @@ public class OrderService {
     }
 
     //RESPONSE PRODUCT
+    //busca produtos no microsserviço de produto por nome
     public ProductDataResponseDTO getProductResponse(String name, Pageable pageable) {
 
         ResponseEntity<Page<ProductResponseDto>> productResponseDto = productResponse.searchProductByName(name, pageable);
@@ -57,26 +61,26 @@ public class OrderService {
 
     //============ GET ORDER SERVICE ===============//
 
-    // FIND BY ID
+    // BUSCA ORDEM POR ID
     public OrderDto findById(Long id) {
         Order order = orderRepository.findById(id).orElseThrow(
                 ()-> new ResourceNotFoundException("Order not found with id: " + id));
         return new OrderDto(order);
     }
 
-    // FIND ALL
+    // BUSCA TODAS ORDENS
     public Page<OrderDto> findAll(Pageable pageable) {
         Page<Order> orders = orderRepository.findAll(pageable);
         return orders.map(OrderDto::new);
     }
 
-    // FIND BY ORDERS FOR STATUS
+    // BUSCA TODAS AS ORDEM PELO STATUS
     public Page<OrderDto> findByStatus(String status, Pageable pageable) {
         Page<Order> ordersStatus = orderRepository.findByStatus(status, pageable);
         return ordersStatus.map(OrderDto::new);
     }
 
-    // FIND BY ORDER FOR CLIENT
+    // BUSCA TODAS AS ORDENS DO CLIENTE PELO NOME DO CLIENTE
     public Page<OrderDto> findByClient(String clientName, Pageable pageable) {
         Page<Order> ordersClient = orderRepository.findByClient(clientName, pageable);
         return ordersClient.map(OrderDto::new);
@@ -88,44 +92,45 @@ public class OrderService {
     @Transactional
     public OrderDto createOrder(OrderDto orderDto) {
 
-        if (orderDto.getOrderItem() == null || orderDto.getOrderItem().isEmpty()) {
-            throw new IllegalArgumentException("Order must have at least one item");
-        }
-
+        // busca cliente por documento response
         ResponseEntity<ClientResponseDto> clientResponseDto =
                 clientResponse.findByPersonDocument(orderDto.getClientDocument());
 
+        // verifica se cliente / produto response existe na base de dados
         if (clientResponseDto.getBody() == null) {
             throw new ResourceNotFoundException("Client not found");
         }
 
+        // cria nova ordem de serviço
         Order order = new Order();
         order.setClientName(clientResponseDto.getBody().getName());
         order.setClientDocument(clientResponseDto.getBody().getPerson().getDocument());
         order.setCreationDate(LocalDateTime.now());
         order.setRequestStatus(RequestStatus.CREATED);
 
+        // lista de produtos da orem de serviço
         List<OrderItem> orderItems = new ArrayList<>();
 
+        // adiciona produtos a lista de produtos
         for (OrderItemDto orderItemDto : orderDto.getOrderItem()) {
 
+            //busca produto por nome response
+            ResponseEntity<ProductResponseDto> productResponseDto =
+                    productResponse.findByNameIgnoreCase(orderItemDto.getProductName());
+
+            if (productResponseDto.getBody() == null) {
+                throw new ResourceNotFoundException("Product not found: ");
+            }
+
+            // verificar ordem dto tem ao menos um item
             if (orderItemDto.getQuantity() == null || orderItemDto.getQuantity() <= 0) {
                 throw new IllegalArgumentException("Item quantity must be greater than zero");
             }
 
-            ResponseEntity<Page<ProductResponseDto>> productResponseDto =
-                    productResponse.searchProductByName(orderItemDto.getProductName(), Pageable.unpaged());
-
-            if (productResponseDto.getBody() == null || productResponseDto.getBody().isEmpty() || productResponseDto.getBody().getContent().isEmpty()) {
-                throw new ResourceNotFoundException("Product not found");
-            }
-
-            ProductResponseDto product = productResponseDto.getBody().getContent().getFirst();
-
             OrderItem orderItem = new OrderItem();
-            orderItem.setProductName(product.getName());
+            orderItem.setProductName(productResponseDto.getBody().getName());
             orderItem.setQuantity(orderItemDto.getQuantity());
-            orderItem.setUniPrice(product.getPrice());
+            orderItem.setUniPrice(productResponseDto.getBody().getPrice());
             orderItem.setOrder(order);
 
             orderItems.add(orderItem);

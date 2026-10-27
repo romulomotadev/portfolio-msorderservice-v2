@@ -26,7 +26,21 @@ public class ControllerExceptionHandler {
         CustomErrorDto err = new CustomErrorDto(
                 Instant.now(),
                 status.value(),
-                "Document not found",
+                "Not found",
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(status).body(err);
+    }
+
+    // TRATADO PRODUTO IGUAL OU MENOR QUE ZERO
+    // TRATANDO FEIGN
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<CustomErrorDto> IllegalArgumentException(IllegalArgumentException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        CustomErrorDto err = new CustomErrorDto(
+                Instant.now(),
+                status.value(),
+                "Item quantity must be greater than zero",
                 request.getRequestURI()
         );
         return ResponseEntity.status(status).body(err);

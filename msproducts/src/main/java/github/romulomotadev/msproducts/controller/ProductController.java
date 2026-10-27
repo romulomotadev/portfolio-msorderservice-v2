@@ -75,6 +75,13 @@ public class ProductController {
         return ResponseEntity.ok().body(dto);
     }
 
+    // BUSCA PRODUTO POR NOME
+    @GetMapping("/name")
+    ResponseEntity<ProductDto> findByName(@RequestParam String name){
+        ProductDto dto = productService.findByName(name);
+        return ResponseEntity.ok().body(dto);
+    }
+
     // BUSCA TODOS PRODUTOS ATIVOS OU INATIVOS
     @GetMapping("/status")
     public ResponseEntity<Page<ProductDto>> findAllProductsStatus(@RequestParam Boolean active, Pageable pageable){
