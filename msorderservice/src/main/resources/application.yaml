@@ -2,6 +2,12 @@ spring:
   application:
     name: msorderservice
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/PORTFOLIO_REALM
+
   datasource:
     url: jdbc:h2:mem:testdb
     username: sa
@@ -14,7 +20,7 @@ spring:
       path: /h2-console
 
 server:
-  port: 8081
+  port: 0
 
 eureka:
   client:
