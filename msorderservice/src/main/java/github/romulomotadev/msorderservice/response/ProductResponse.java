@@ -1,5 +1,6 @@
 package github.romulomotadev.msorderservice.response;
 
+import github.romulomotadev.msorderservice.config.FeignSecurityConfig;
 import github.romulomotadev.msorderservice.dto.ProductResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
@@ -9,8 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "msproducts", path = "/products")
-
+@FeignClient(name = "msproducts",
+        path = "/products",
+        configuration = FeignSecurityConfig.class)
 public interface ProductResponse {
 
     // BUSCA PRODUTOS POR NOME

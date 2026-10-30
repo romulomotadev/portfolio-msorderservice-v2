@@ -1,13 +1,15 @@
 package github.romulomotadev.msorderservice.response;
 
+import github.romulomotadev.msorderservice.config.FeignSecurityConfig;
 import github.romulomotadev.msorderservice.dto.ClientResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "msclients", path = "/clients")
-
+@FeignClient(name = "msclients",
+        path = "/clients",
+        configuration = FeignSecurityConfig.class)
 public interface ClientResponse {
 
     @GetMapping(value = "/document")
