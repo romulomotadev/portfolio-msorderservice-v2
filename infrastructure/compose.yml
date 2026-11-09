@@ -1,0 +1,84 @@
+
+services:
+  eureka:
+    image: mseurekaserver:1.0
+    ports:
+      - "8761:8761"
+
+  msclients:
+    image: msclients:1.0
+    ports:
+      - "8082:8080"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+    depends_on:
+      - eureka
+
+  msproducts:
+    image: msproducts:1.0
+    ports:
+      - "8083:8080"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+    depends_on:
+      - eureka
+
+  msorderservice:
+    image: msorderservice:1.0
+    ports:
+      - "8084:8080"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET}
+    depends_on:
+      - eureka
+
+  mscloudgateway:
+    image: mscloudgateway:1.0
+    ports:
+      - "8080:8080"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+    depends_on:
+      - eureka
+
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.7.0
+    command: start-dev --import-realm
+
+    ports:
+      - "8081:8080"
+
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak_db
+      KC_DB_USERNAME: keycloak_user
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    volumes:
+      - "C:/keycloak-backup/portfolio-realm.json:/opt/keycloak/data/import/PORTFOLIO_REALM-realm.json:ro"
+
+volumes:
+  postgres_data:
+
