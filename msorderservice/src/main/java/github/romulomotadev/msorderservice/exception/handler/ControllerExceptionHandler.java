@@ -23,6 +23,13 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(FeignException.FeignClientException.class)
     public ResponseEntity<CustomErrorDto> feignClientException(FeignException.FeignClientException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;
+
+        System.out.println(
+                "FEIGN ERROR - STATUS: " + e.status()
+                        + " | REQUEST: " + e.request().httpMethod()
+                        + " " + e.request().url()
+        );
+
         CustomErrorDto err = new CustomErrorDto(
                 Instant.now(),
                 status.value(),

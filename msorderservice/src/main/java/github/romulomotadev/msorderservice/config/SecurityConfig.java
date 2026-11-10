@@ -1,6 +1,7 @@
 package github.romulomotadev.msorderservice.config;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,7 +13,7 @@ import org.springframework.http.HttpMethod;
 /* Regras que cada requisição HTTP deve seguir antes de chegar aos controllers */
 @Configuration
 @EnableWebSecurity // Habilita a integração da configuração do Spring Security com a aplicação web
-@Data
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     //Injetando conversor JWT

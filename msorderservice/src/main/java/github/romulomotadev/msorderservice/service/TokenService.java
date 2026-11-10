@@ -32,6 +32,20 @@ public class TokenService {
         KeycloakTokenResponse response =
                 keycloakClient.getToken(form);
 
+        /*Imprimi payload do jwt, para inspencionar o campo iss*/
+/*        String accessToken = response.getAccessToken();
+
+        String[] parts = accessToken.split("\\.");
+
+        String payload = new String(
+                java.util.Base64.getUrlDecoder().decode(parts[1]),
+                java.nio.charset.StandardCharsets.UTF_8
+        );
+
+        System.out.println("TOKEN PAYLOAD: " + payload);
+
+        return accessToken;*/
+
         return response.getAccessToken();
     }
 }

@@ -2,18 +2,6 @@ spring:
   application:
     name: msorderservice
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8081/realms/PORTFOLIO_REALM
-
-keycloak:
-  url: http://localhost:8081
-  realm: PORTFOLIO_REALM
-  client-id: orders-service
-  client-secret: ${KEYCLOAK_CLIENT_SECRET}
-
   datasource:
     url: jdbc:h2:mem:testdb
     username: sa
@@ -24,6 +12,19 @@ keycloak:
     console:
       enabled: true
       path: /h2-console
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/PORTFOLIO_REALM
+          jwk-set-uri: http://keycloak:8080/realms/PORTFOLIO_REALM/protocol/openid-connect/certs
+
+keycloak:
+  url: http://keycloak:8080
+  realm: PORTFOLIO_REALM
+  client-id: orders-service
+  client-secret: ${KEYCLOAK_CLIENT_SECRET}
 
 server:
   port: 0
