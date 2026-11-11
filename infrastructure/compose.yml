@@ -27,8 +27,15 @@ services:
       - "8083:8080"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+      DB_HOST: postgres
+      DB_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     depends_on:
-      - eureka
+      eureka:
+        condition: service_started
+      postgres:
+        condition: service_healthy
 
   msorderservice:
     image: msorderservice:1.0
@@ -37,8 +44,15 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
       KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET}
+      DB_HOST: postgres
+      DB_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     depends_on:
-      - eureka
+      eureka:
+        condition: service_started
+      postgres:
+        condition: service_healthy
 
   mscloudgateway:
     image: mscloudgateway:1.0
