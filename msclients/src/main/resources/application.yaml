@@ -9,6 +9,16 @@ spring:
           issuer-uri: http://localhost:8081/realms/PORTFOLIO_REALM
           jwk-set-uri: http://keycloak:8080/realms/PORTFOLIO_REALM/protocol/openid-connect/certs
 
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/clients_db
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
 server:
   port: 0
 

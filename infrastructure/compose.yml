@@ -11,8 +11,15 @@ services:
       - "8082:8080"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka
+      DB_HOST: postgres
+      DB_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     depends_on:
-      - eureka
+      eureka:
+        condition: service_started
+      postgres:
+        condition: service_healthy
 
   msproducts:
     image: msproducts:1.0
@@ -44,6 +51,8 @@ services:
 
   postgres:
     image: postgres:17
+    ports:
+      - "127.0.0.1:5433:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
