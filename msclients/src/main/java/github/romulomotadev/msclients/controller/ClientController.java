@@ -1,11 +1,14 @@
 package github.romulomotadev.msclients.controller;
 
 import github.romulomotadev.msclients.dto.ClientDto;
+import github.romulomotadev.msclients.exception.exceptions.ResourceNotFoundException;
 import github.romulomotadev.msclients.service.ClientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -56,8 +59,9 @@ public class ClientController {
     //================== DELETE ====================
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<ClientDto> delete(@PathVariable Long id) {
         clientService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 
