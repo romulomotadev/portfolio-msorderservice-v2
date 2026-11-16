@@ -339,7 +339,6 @@ public class ClientControllerTests {
     }
 
     //ID NAO EXISTENTE
-    //GET ID NÃO EXISTENTE
     @Test
     @DisplayName("update deve lança Resource Not Found Exception quando ID não existe")
     void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() throws Exception {

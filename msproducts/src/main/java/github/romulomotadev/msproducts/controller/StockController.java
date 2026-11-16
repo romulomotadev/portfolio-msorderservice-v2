@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StockController {
 
-    public final StockService stockService;
+    private final StockService stockService;
 
     //============ UPDATE ===============//
 
