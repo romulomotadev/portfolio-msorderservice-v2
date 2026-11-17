@@ -4,6 +4,7 @@ import github.romulomotadev.msorderservice.dto.ClientDataResponseDTO;
 import github.romulomotadev.msorderservice.dto.OrderDto;
 import github.romulomotadev.msorderservice.dto.ProductDataResponseDTO;
 import github.romulomotadev.msorderservice.service.OrderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,28 +40,28 @@ public class OrderController {
         return ResponseEntity.ok(productResponseDto);
     }
 
-    // FIND BY ID
+    // BUSCA POR ID
     @GetMapping("/{id}")
     public ResponseEntity<OrderDto> findById(@PathVariable("id") Long id){
         OrderDto orderDto = orderService.findById(id);
         return ResponseEntity.ok(orderDto);
     }
 
-    // FIND ALL
+    // BUSCA TODOS
     @GetMapping
     public ResponseEntity<Page<OrderDto>> findAll(Pageable pageable){
         Page<OrderDto> orderDtoPage = orderService.findAll(pageable);
         return ResponseEntity.ok(orderDtoPage);
     }
 
-    // FIND BY ORDERS FOR STATUS
+    // BUSCAR TODAS ORDENS POR STATUS
     @GetMapping("/status")
     public ResponseEntity<Page<OrderDto>> findByStatus(@RequestParam("status") String status, Pageable pageable){
         Page<OrderDto> orderDtoPage = orderService.findByStatus(status, pageable);
         return ResponseEntity.ok(orderDtoPage);
     }
 
-    // FIND BY ORDER FOR CLIENT
+    // BUSCA ORDENS PELO NOME DO CLIENTE
     @GetMapping("/clientName")
     public ResponseEntity<Page<OrderDto>> findByClient(@RequestParam("clientName") String clientName, Pageable pageable){
         Page<OrderDto> orderDtoPage = orderService.findByClient(clientName, pageable);
@@ -71,7 +72,7 @@ public class OrderController {
     //============ POST ===============//
 
     @PostMapping
-    public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto){
+    public ResponseEntity<OrderDto> createOrder(@Valid @RequestBody OrderDto orderDto){
         OrderDto dto = orderService.createOrder(orderDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);

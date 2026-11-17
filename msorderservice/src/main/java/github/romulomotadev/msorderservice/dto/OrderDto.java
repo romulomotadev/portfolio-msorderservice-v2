@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import github.romulomotadev.msorderservice.entities.Order;
 import github.romulomotadev.msorderservice.entities.OrderItem;
 import github.romulomotadev.msorderservice.entities.RequestStatus;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,7 @@ public class OrderDto {
 
     private Long id;
     private String clientName;
+    @NotBlank(message = "Client Document is required")
     private String clientDocument;
     private LocalDateTime creationDate;
 

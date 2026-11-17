@@ -54,7 +54,6 @@ public class ProductControllerTests {
     //================== ATRIBUTOS ==================
 
     private ProductDto productDto;
-    private ProductMinDto productMinDto;
     private Long existingId;
     private Long nonExistingId;
     private String existingSku;
@@ -64,6 +63,7 @@ public class ProductControllerTests {
     private Boolean active;
     private String jsonBody;
     private Page<ProductDto> page;
+
 
     //================== INICIALIZAÇÃO ==================
 
@@ -80,7 +80,7 @@ public class ProductControllerTests {
         //Factory
         Product product = ProductFactory.createdProduct();
         productDto = new ProductDto(product);
-        productMinDto = new ProductMinDto(product);
+        ProductMinDto productMinDto = new ProductMinDto(product);
 
         //Corpo da requisição
         jsonBody = objectMapper.writeValueAsString(productMinDto);
