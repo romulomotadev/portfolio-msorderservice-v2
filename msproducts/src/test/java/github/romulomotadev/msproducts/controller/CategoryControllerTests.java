@@ -89,7 +89,7 @@ public class CategoryControllerTests {
                         ))
                         .accept(MediaType.APPLICATION_JSON));
 
-        //VALIDAÇÃO - DADOS ESPERADOS JASON
+        //VALIDAÇÃO - DADOS ESPERADOS JSON
         resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(existingId))
                 .andExpect(jsonPath("$.name").value(categoryDto.getName()));
@@ -137,7 +137,7 @@ public class CategoryControllerTests {
                         ))
                         .accept(MediaType.APPLICATION_JSON));
 
-        //VALIDAÇÃO - DADOS ESPERADOS JASON
+        //VALIDAÇÃO - DADOS ESPERADOS JSON
         resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(existingId))
                 .andExpect(jsonPath("$[0].name").value(categoryDto.getName()));
@@ -163,7 +163,7 @@ public class CategoryControllerTests {
                         ))
                         .accept(MediaType.APPLICATION_JSON));
 
-        //VALIDAÇÃO - DADOS ESPERADOS JASON
+        //VALIDAÇÃO - DADOS ESPERADOS JSON
         resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(existingId))
                 .andExpect(jsonPath("$[0].name").value(categoryDto.getName()));
@@ -235,7 +235,7 @@ public class CategoryControllerTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON));
 
-        //VALIDAÇÃO - DADOS ESPERADOS JASON
+        //VALIDAÇÃO - DADOS ESPERADOS JSON
         resultActions.andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(existingId))
                 .andExpect(jsonPath("$.name").value(categoryDto.getName()));
@@ -292,7 +292,7 @@ public class CategoryControllerTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON));
 
-        //VALIDAÇÃO - DADOS ESPERADOS JASON
+        //VALIDAÇÃO - DADOS ESPERADOS JSON
         resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(existingId))
                 .andExpect(jsonPath("$.name").value(categoryDto.getName()));

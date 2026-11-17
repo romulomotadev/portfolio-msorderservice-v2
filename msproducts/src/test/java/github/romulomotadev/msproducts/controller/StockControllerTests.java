@@ -87,7 +87,7 @@ public class StockControllerTests {
                         ))
                         .accept(MediaType.APPLICATION_JSON));
 
-        //VALIDAÇÃO - DADOS ESPERADOS JASON
+        //VALIDAÇÃO - DADOS ESPERADOS JSON
         resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(existingId))
                 .andExpect(jsonPath("$.quantity").value(stockDto.getQuantity()));
@@ -133,7 +133,7 @@ public class StockControllerTests {
                         ))
                         .accept(MediaType.APPLICATION_JSON));
 
-        //VALIDAÇÃO - DADOS ESPERADOS JASON
+        //VALIDAÇÃO - DADOS ESPERADOS JSON
         resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(existingId))
                 .andExpect(jsonPath("$[0].quantity").value(stockDto.getQuantity()));
@@ -163,7 +163,7 @@ public class StockControllerTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON));
 
-        //VALIDAÇÃO - DADOS ESPERADOS JASON
+        //VALIDAÇÃO - DADOS ESPERADOS JSON
         resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(existingId))
                 .andExpect(jsonPath("$.quantity").value(stockDto.getQuantity()));
