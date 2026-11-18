@@ -24,14 +24,15 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class ClientServiceTest {
 
+    //================== DEPENDÊNCIAS ==================
+
     @InjectMocks
     private ClientService service;
 
     @Mock
     private ClientRepository repository;
 
-
-    // ======= DADOS ========
+    //================== ATRIBUTOS ==================
 
     private Long existingId;
     private Long nonExistingId;
@@ -41,6 +42,8 @@ public class ClientServiceTest {
     private Client client;
     private ClientDto clientDto;
 
+    //================== INICIALIZAÇÃO ==================
+
     @BeforeEach
     void setUp() {
         existingId = 1L;
@@ -48,6 +51,7 @@ public class ClientServiceTest {
         existingDocument = "12345678901";
         nonExistingDocument = "98765432109";
 
+        //Factory
         client = ClientFactory.createClient();
         clientDto = new ClientDto(client);
     }

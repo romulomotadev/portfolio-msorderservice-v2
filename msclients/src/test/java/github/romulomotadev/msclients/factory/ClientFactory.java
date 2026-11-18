@@ -22,7 +22,9 @@ public class ClientFactory {
         person.setId(1L);
         person.setType(NATURAL_PERSON);
         person.setDocument("123.456.789-01");
+        // Relacionamento bidirecional
         client.setPerson(person);
+        person.setClient(client);
 
         List<Address> addresses = new ArrayList<>();
         Address address = new Address();
